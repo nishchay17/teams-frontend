@@ -11,7 +11,7 @@ function UserProvider(props) {
     const { type } = action;
 
     switch (type) {
-      case "ADD_USER":
+      case "USER_LOGIN":
         return {
           ...state,
           userState: action.user,

@@ -13,8 +13,12 @@ function App() {
       <UserProvider>
         <Router>
           <Switch>
-            <Route path="/login" exact children={LoginLayout} />
-            <Route path="/signup" exact children={SignupLayout} />
+            <Route path="/login" exact>
+              <LoginLayout />
+            </Route>
+            <Route path="/signup" exact>
+              <SignupLayout />
+            </Route>
           </Switch>
         </Router>
       </UserProvider>

@@ -43,4 +43,22 @@ export const theme = {
     input: "#A7A7A7",
     background: "#ffffff",
   },
+  buttons: {
+    primary: {
+      color: "black",
+      fontSize: "1.3rem",
+      bg: "primary",
+      px: "1.5rem",
+      py: "0.7rem",
+      cursor: "pointer",
+      ":hover": {
+        boxShadow: "0px 0px 7px -2px rgba(0,0,0,0.25)",
+        outline: "none",
+      },
+      ":disabled": {
+        bg: "input",
+        cursor: "not-allowed",
+      },
+    },
+  },
 };
