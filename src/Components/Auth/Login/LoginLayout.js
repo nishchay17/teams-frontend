@@ -7,7 +7,6 @@ import { useUser } from "../../../Provider/UserProvider";
 import Logo from "../../library/Logo";
 import FormInput from "../../Form/FormInput";
 import AuthWrapper from "../AuthWrapper";
-import URL from "../../../URL";
 
 function LoginLayout() {
   const userContext = useUser();
@@ -22,7 +21,7 @@ function LoginLayout() {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    const res = await axios.post(`${URL}/user/login`, {
+    const res = await axios.post(`${process.env.REACT_APP_URL}/user/login`, {
       ...data,
     });
     setIsLoading(false);
