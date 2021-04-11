@@ -5,7 +5,7 @@ function Container({ children, ...props }) {
   return (
     <Flex
       flexDirection="column"
-      maxWidth="1400px"
+      maxWidth="1500px"
       px="5rem"
       mx="auto"
       {...props}

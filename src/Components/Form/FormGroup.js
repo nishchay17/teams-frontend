@@ -3,7 +3,7 @@ import { Box } from "rebass";
 
 function FormGroup({ children, ...props }) {
   return (
-    <Box {...props} my="1.5rem" width="25rem">
+    <Box {...props} mb="2rem" width="20rem">
       {children}
     </Box>
   );
