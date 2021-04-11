@@ -41,16 +41,16 @@ function LoginLayout() {
         width="55%"
       >
         <Logo mb="5rem" />
-        <Text as="h1" fontWeight="500">
+        <Text as="h1" fontSize="heading" fontWeight="500">
           Login
         </Text>
-        <Text as="p" mt="0.5rem">
+        <Text as="p" fontSize="text" my="0.3rem">
           New user sign-up{" "}
           <Link color="link" sx={{ cursor: "pointer" }}>
             here
           </Link>
         </Text>
-        <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" mt="2rem" onSubmit={handleSubmit(onSubmit)}>
           <FormInput
             label="Email"
             register={register}
@@ -58,6 +58,7 @@ function LoginLayout() {
             errors={errors}
             required
           />
+
           <FormInput
             label="Password"
             register={register}
@@ -66,9 +67,7 @@ function LoginLayout() {
             type="password"
             required
           />
-          <Button mt="0.5rem" disabled={isLoading}>
-            Login
-          </Button>
+          <Button disabled={isLoading}>Login</Button>
         </Box>
         <Text mt="2rem">
           Forgot password?{" "}

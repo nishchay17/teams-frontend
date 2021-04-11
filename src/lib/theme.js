@@ -10,13 +10,11 @@ breakpoints.xl = breakpoints[4];
 export const theme = {
   breakpoints,
   fontSizes: {
-    tiny: ".5rem",
-    small: ".625rem",
-    body: ".75rem",
-    title: "1rem",
-    big: "1.25rem",
-    large: "2rem",
-    larger: "2.5rem",
+    text: "1rem",
+    error: "1rem",
+    subheading: "1.5rem",
+    label: "1.5rem",
+    heading: "2rem",
   },
   space: [
     "0",

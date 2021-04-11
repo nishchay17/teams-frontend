@@ -6,6 +6,7 @@ function Input({ type, name, register, required, placeholder }) {
     <Inputr
       width="100%"
       py="0.8rem"
+      fontSize="text"
       sx={{
         borderRadius: "8px",
         borderColor: "input",
