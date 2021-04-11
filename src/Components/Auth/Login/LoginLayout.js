@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, Flex, Link, Text } from "rebass";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { useUser } from "../../../Provider/UserProvider";
@@ -11,6 +12,8 @@ import AuthWrapper from "../AuthWrapper";
 function LoginLayout() {
   const userContext = useUser();
 
+  const history = useHistory();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -20,6 +23,7 @@ function LoginLayout() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    history.push("/profile");
     setIsLoading(true);
     const res = await axios.post(`${process.env.REACT_APP_URL}/user/login`, {
       ...data,
