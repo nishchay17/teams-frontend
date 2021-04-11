@@ -23,7 +23,6 @@ function LoginLayout() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    history.push("/profile");
     setIsLoading(true);
     const res = await axios.post(`${process.env.REACT_APP_URL}/user/login`, {
       ...data,
@@ -34,6 +33,7 @@ function LoginLayout() {
       type: "USER_LOGIN",
       user: res.data,
     });
+    history.push("/profile");
   };
 
   return (
