@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Image } from "rebass";
 import Container from "../library/Container";
-import authSideImage from "../../Assets/svg/building.svg";
+import authSideImage from "../../Assets/img/building.png";
 
 function AuthWrapper({ children }) {
   return (
