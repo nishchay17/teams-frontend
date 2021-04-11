@@ -12,6 +12,7 @@ function FormInput({
   required,
   errors,
   inputProps,
+  customError,
   ...props
 }) {
   return (
@@ -34,6 +35,16 @@ function FormInput({
           sx={{ textTransform: "capitalize" }}
         >
           {name} required
+        </Text>
+      )}
+      {customError && (
+        <Text
+          color="error"
+          fontSize="error"
+          mt="0.5rem"
+          sx={{ textTransform: "capitalize" }}
+        >
+          {customError}
         </Text>
       )}
     </FormGroup>

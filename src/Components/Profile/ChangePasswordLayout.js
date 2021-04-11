@@ -7,9 +7,15 @@ import FormInput from "../Form/FormInput";
 import Avatar from "../library/Avatar";
 import Container from "../library/Container";
 import Username from "../library/Username";
+import { useUser } from "../../Provider/UserProvider";
 
 const ChangePasswordLayout = ({ props }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const userContext = useUser();
+
+  console.log(userContext.userDetails);
 
   const {
     register,
@@ -18,12 +24,18 @@ const ChangePasswordLayout = ({ props }) => {
   } = useForm();
 
   const headers = {
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA3MmQ1OGM3ZDNlMTAyMmE4YTJjNGYzIn0sImlhdCI6MTYxODE0MTY1NywiZXhwIjoxNjE5MDA1NjU3fQ.kebqUh7HdrMa_HfOXsMdylvocHW2_HMAwhiwfgrTEqg `,
+    Authorization: `Bearer ${userContext.userDetails.userState.token}`,
   };
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    console.log(data);
+    setError("");
+
+    if (data.password !== data.newPasswordAgain) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
 
     const res = await axios.put(
       `${process.env.REACT_APP_URL}/user/update-password`,
@@ -72,7 +84,13 @@ const ChangePasswordLayout = ({ props }) => {
               register={register}
               name="newPasswordAgain"
               errors={errors}
+              customError={error}
             />
+            {/* {error && (
+              <Text color="error" fontSize="error">
+                {error}
+              </Text>
+            )} */}
             <Button disabled={isLoading} mb="2rem">
               Change Password
             </Button>
