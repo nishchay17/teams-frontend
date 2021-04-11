@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex, Image, Text } from "rebass";
 import logo from "../../Assets/svg/logo.svg";
 
-const Avatar = (props) => {
+const Avatar = ({ username, props }) => {
   return (
     <Flex alignItems="center" {...props}>
       <Box
@@ -27,11 +27,15 @@ const Avatar = (props) => {
           marginLeft: "-3rem",
         }}
       />
-      <Text as="p" ml="2rem" fontSize="big">
-        Hello Username
+      <Text as="p" ml="2rem" fontSize="subheading">
+        Hello {username}
       </Text>
     </Flex>
   );
+};
+
+Avatar.defaultProps = {
+  username: "Sachin",
 };
 
 export default Avatar;
