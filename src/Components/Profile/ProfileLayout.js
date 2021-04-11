@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Flex, Text } from "rebass";
+import { Box, Button, Flex, Link, Text } from "rebass";
 import Avatar from "../library/Avatar";
 import Container from "../library/Container";
 
@@ -15,7 +15,9 @@ const ProfileLayout = ({ username, teamName, email, empId, props }) => {
         <Flex alignItems="flex-end" justifyContent="space-between">
           <Avatar />
           <Box>
-            <Button mr="1rem">Edit Password</Button>
+            <Link href="/change-password">
+              <Button mr="1rem">Edit Password</Button>
+            </Link>
             <Button disabled>Something</Button>
           </Box>
         </Flex>
