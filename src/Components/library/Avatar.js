@@ -1,13 +1,12 @@
 import React from "react";
-import { Box, Flex, Image, Text } from "rebass";
-import logo from "../../Assets/svg/logo.svg";
+import { Box, Flex, Text } from "rebass";
 
 const Avatar = ({ username, props }) => {
   return (
     <Flex alignItems="center" {...props}>
       <Box
-        width="15rem"
-        height="15rem"
+        width="12rem"
+        height="12rem"
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -19,13 +18,13 @@ const Avatar = ({ username, props }) => {
 
       <Box
         alignSelf="flex-end"
-        width="3rem"
-        height="3rem"
+        width="2rem"
+        height="2rem"
         bg="green"
         sx={{
           borderRadius: "50%",
 
-          marginLeft: "-4rem",
+          marginLeft: "-3.5rem",
         }}
       />
       <Text as="p" ml="4rem" fontSize="subheading">

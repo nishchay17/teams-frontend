@@ -7,6 +7,7 @@ import UserProvider from "./Provider/UserProvider";
 import LoginLayout from "./Components/Auth/Login/LoginLayout";
 import SignupLayout from "./Components/Auth/Signup/SignupLayout";
 import ProfileLayout from "./Components/Profile/ProfileLayout";
+import ChangePasswordLayout from "./Components/Profile/ChangePasswordLayout";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
             </Route>
             <Route path="/profile" exact>
               <ProfileLayout />
+            </Route>
+            <Route path="/change-password" exact>
+              <ChangePasswordLayout />
             </Route>
           </Switch>
         </Router>
