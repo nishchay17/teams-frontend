@@ -6,6 +6,7 @@ import { theme } from "./lib/theme";
 import UserProvider from "./Provider/UserProvider";
 import LoginLayout from "./Components/Auth/Login/LoginLayout";
 import SignupLayout from "./Components/Auth/Signup/SignupLayout";
+import ProfileLayout from "./Components/Profile/ProfileLayout";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
             </Route>
             <Route path="/signup" exact>
               <SignupLayout />
+            </Route>
+            <Route path="/profile" exact>
+              <ProfileLayout />
             </Route>
           </Switch>
         </Router>
