@@ -6,8 +6,8 @@ const Avatar = ({ username, props }) => {
   return (
     <Flex alignItems="center" {...props}>
       <Box
-        width="215px"
-        height="215px"
+        width="15rem"
+        height="15rem"
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -18,16 +18,17 @@ const Avatar = ({ username, props }) => {
       />
 
       <Box
-        width="46px"
-        height="46px"
+        alignSelf="flex-end"
+        width="3rem"
+        height="3rem"
         bg="green"
         sx={{
           borderRadius: "50%",
-          marginTop: "9rem",
-          marginLeft: "-3rem",
+
+          marginLeft: "-4rem",
         }}
       />
-      <Text as="p" ml="2rem" fontSize="subheading">
+      <Text as="p" ml="4rem" fontSize="subheading">
         Hello {username}
       </Text>
     </Flex>
