@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "theme-ui";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import { theme } from "./lib/theme";
 import UserProvider from "./Provider/UserProvider";
@@ -13,6 +13,9 @@ function App() {
       <UserProvider>
         <Router>
           <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
             <Route path="/login" exact>
               <LoginLayout />
             </Route>
@@ -24,6 +27,10 @@ function App() {
       </UserProvider>
     </ThemeProvider>
   );
+}
+
+function Home() {
+  return <Link to="/login">login</Link>;
 }
 
 export default App;
