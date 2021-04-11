@@ -11,6 +11,7 @@ function FormInput({
   register,
   required,
   errors,
+  inputProps,
   ...props
 }) {
   return (
@@ -21,7 +22,9 @@ function FormInput({
         register={register}
         name={name}
         required={required}
+        error={required && errors && errors[name]}
         placeholder={"Enter " + label}
+        {...inputProps}
       />
       {required && errors && errors[name] && (
         <Text
