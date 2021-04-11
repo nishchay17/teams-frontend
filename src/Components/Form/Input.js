@@ -1,7 +1,7 @@
 import React from "react";
 import { Input as Inputr } from "@rebass/forms";
 
-function Input({ type, name, register, required, placeholder }) {
+function Input({ type, name, register, required, placeholder, error }) {
   return (
     <Inputr
       width="100%"
@@ -9,7 +9,7 @@ function Input({ type, name, register, required, placeholder }) {
       fontSize="text"
       sx={{
         borderRadius: "8px",
-        borderColor: "input",
+        borderColor: error ? "error" : "input",
         outline: "none",
         ":focus": {
           borderColor: "#001939",

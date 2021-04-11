@@ -21,6 +21,7 @@ function FormInput({
         register={register}
         name={name}
         required={required}
+        error={required && errors && errors[name]}
         placeholder={"Enter " + label}
       />
       {required && errors && errors[name] && (
