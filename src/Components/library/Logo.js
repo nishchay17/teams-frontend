@@ -19,7 +19,7 @@ function Logo(props) {
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <Text fontSize="subheading" ml="1rem" mt="0.1rem">
+        <Text fontSize="subheading" ml="1rem" mt="0.1rem" color={props.color}>
           Teams
         </Text>
       </motion.div>

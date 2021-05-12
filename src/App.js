@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "theme-ui";
-import { Switch, Route, Link, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 import { theme } from "./lib/theme";
@@ -8,6 +8,7 @@ import UserProvider from "./Provider/UserProvider";
 import LoginLayout from "./Components/Auth/Login/LoginLayout";
 import SignupLayout from "./Components/Auth/Signup/SignupLayout";
 import ProfileLayout from "./Components/Profile/ProfileLayout";
+import TasksLayout from "./Components/Tasks/TasksLayout";
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,9 @@ function App() {
             <Route path="/profile" exact>
               <ProfileLayout />
             </Route>
+            <Route path="/tasks" exact>
+              <TasksLayout />
+            </Route>
           </Switch>
         </AnimatePresence>
       </UserProvider>
@@ -36,7 +40,9 @@ function App() {
 }
 
 function Home() {
-  return <Link to="/login">login</Link>;
+  const history = useHistory();
+  useEffect(() => history.push("/login"), []);
+  return <></>;
 }
 
 export default App;

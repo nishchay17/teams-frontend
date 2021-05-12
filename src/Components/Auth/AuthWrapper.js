@@ -17,7 +17,7 @@ function AuthWrapper({ children }) {
         <motion.div
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 1 }}
+          transition={{ delay: 0.7 }}
         >
           <Image
             src={authSideImage}

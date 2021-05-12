@@ -11,6 +11,9 @@ function Input({ type, name, register, required, placeholder, error }) {
         borderRadius: "8px",
         borderColor: error ? "error" : "input",
         outline: "none",
+        "::placeholder": {
+          color: error ? "error" : "input",
+        },
         ":focus": {
           borderColor: "#001939",
         },

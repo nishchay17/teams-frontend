@@ -49,6 +49,9 @@ export const theme = {
       px: "1.5rem",
       py: "0.7rem",
       cursor: "pointer",
+      ":focus": {
+        outline: "none",
+      },
       ":hover": {
         boxShadow: "0px 0px 7px -2px rgba(0,0,0,0.25)",
         outline: "none",
