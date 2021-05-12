@@ -1,14 +1,18 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
+import { useHistory } from "react-router-dom";
 import { GoTasklist } from "react-icons/go";
 import { RiShoppingBasketLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineLogout } from "react-icons/ai";
+
 import Logo from "./Logo";
-import { useHistory } from "react-router-dom";
+import { useUser } from "../../Provider/UserProvider";
 
 function Sidebar() {
   const history = useHistory();
+
+  const userContext = useUser();
 
   function NavItem({ Icon, name, to, ...props }) {
     return (
@@ -51,7 +55,17 @@ function Sidebar() {
         <NavItem Icon={RiShoppingBasketLine} name="Basket" to="/basket" />
         <NavItem Icon={CgProfile} name="Profile" to="/profile" />
         <NavItem Icon={GoTasklist} name="Tasks" to="/tasks" />
-        <NavItem Icon={AiOutlineLogout} name="Logout" to="/logout" mt="auto" />
+        <NavItem
+          Icon={AiOutlineLogout}
+          name="Logout"
+          onClick={() => {
+            userContext?.dispatch({
+              type: "USER_LOGOUT",
+            });
+            history.push("/");
+          }}
+          mt="auto"
+        />
       </Flex>
     </Box>
   );

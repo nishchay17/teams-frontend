@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router";
 import { Box, Flex, Image } from "rebass";
-import Container from "../library/Container";
-import authSideImage from "../../Assets/img/building.png";
 import { motion } from "framer-motion";
 
+import Container from "../library/Container";
+import authSideImage from "../../Assets/img/building.png";
+import { useUser } from "../../Provider/UserProvider";
+
 function AuthWrapper({ children }) {
+  const userContext = useUser();
+  const history = useHistory();
+  console.log();
+  useEffect(() => {
+    if (userContext.userDetails.userState.token) {
+      history.push("/profile");
+    }
+  }, [userContext.userDetails]);
+
   return (
     <motion.div exit={{ opacity: 0 }}>
       <Flex

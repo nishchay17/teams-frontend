@@ -6,6 +6,7 @@ import Avatar from "../library/Avatar";
 import Container from "../library/Container";
 import Logo from "../library/Logo";
 import Sidebar from "../library/Sidebar";
+import { useHistory } from "react-router";
 
 import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
@@ -14,13 +15,13 @@ const ProfileLayout = ({ username, teamName, email, empId, props }) => {
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const history = useHistory();
   const { userDetails } = useUser();
 
   useEffect(() => fetchProfileData(), [userDetails]);
   const fetchProfileData = async () => {
     setIsLoading(true);
-    console.log(userDetails.userState.token);
+    if (!userDetails.userState.token) history.push("/");
     try {
       const res = await axios.get(`${process.env.REACT_APP_URL}/user/me`, {
         headers: { Authorization: `Bearer ${userDetails.userState.token}` },
