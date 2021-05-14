@@ -7,8 +7,8 @@ import { theme } from "./lib/theme";
 import UserProvider from "./Provider/UserProvider";
 import LoginLayout from "./Components/Auth/Login/LoginLayout";
 import SignupLayout from "./Components/Auth/Signup/SignupLayout";
-import ProfileLayout from "./Components/Profile/ProfileLayout";
-import TasksLayout from "./Components/Tasks/TasksLayout";
+import Profile from "./Components/Modules/Profile";
+import Tasks from "./Components/Modules/Tasks";
 
 function App() {
   const location = useLocation();
@@ -27,10 +27,10 @@ function App() {
               <SignupLayout />
             </Route>
             <Route path="/profile" exact>
-              <ProfileLayout />
+              <Profile />
             </Route>
             <Route path="/tasks" exact>
-              <TasksLayout />
+              <Tasks />
             </Route>
           </Switch>
         </AnimatePresence>
