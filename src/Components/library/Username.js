@@ -14,7 +14,7 @@ const Username = ({ username, props }) => {
 };
 
 Username.defaultProps = {
-  username: "Sachin",
+  username: "NA",
 };
 
 export default Username;

@@ -5,8 +5,8 @@ const Avatar = ({ username, props }) => {
   return (
     <Flex alignItems="center" {...props}>
       <Box
-        width="12rem"
-        height="12rem"
+        width="10rem"
+        height="10rem"
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -16,18 +16,7 @@ const Avatar = ({ username, props }) => {
         }}
       />
 
-      <Box
-        alignSelf="flex-end"
-        width="2rem"
-        height="2rem"
-        bg="green"
-        sx={{
-          borderRadius: "50%",
-
-          marginLeft: "-3.5rem",
-        }}
-      />
-      <Text as="p" ml="4rem" fontSize="subheading">
+      <Text as="p" ml="3rem" fontSize="2rem">
         Hello {username}
       </Text>
     </Flex>
@@ -35,7 +24,7 @@ const Avatar = ({ username, props }) => {
 };
 
 Avatar.defaultProps = {
-  username: "Sachin",
+  username: "",
 };
 
 export default Avatar;

@@ -16,6 +16,11 @@ function UserProvider(props) {
           ...state,
           userState: action.user,
         };
+      case "USER_LOGOUT":
+        return {
+          ...state,
+          userState: {},
+        };
       default:
         return {
           ...state,
@@ -25,8 +30,31 @@ function UserProvider(props) {
 
   const [userDetails, dispatch] = useReducer(reducer, initialState);
 
+  const loadFromStorage = () => {
+    const userStateString = localStorage.getItem("user_state");
+    if (userStateString) {
+      console.log(JSON.parse(userStateString));
+      dispatch({
+        type: "USER_LOGIN",
+        user: { ...JSON.parse(userStateString).userState },
+      });
+    } else {
+      dispatch({
+        type: "IS_LOGGED_IN",
+      });
+    }
+  };
+
+  const syncWithStorage = () => {
+    localStorage.setItem("user_state", JSON.stringify(userDetails));
+  };
+
   useEffect(() => {
-    console.log(userDetails);
+    loadFromStorage();
+  }, []);
+
+  useEffect(() => {
+    syncWithStorage();
   }, [userDetails]);
 
   return (

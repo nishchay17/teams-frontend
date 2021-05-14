@@ -1,21 +1,49 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Button, Flex, Text } from "rebass";
 
 import FormInput from "../Form/FormInput";
-import Avatar from "../library/Avatar";
 import Container from "../library/Container";
 import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
+import Sidebar from "../library/Sidebar";
+import { useHistory } from "react-router";
 
 const ChangePasswordLayout = ({ props }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState({});
   const [error, setError] = useState("");
+  const [responseMessage, setResponseMessage] = useState({
+    success: "",
+    err: "",
+  });
 
-  const userContext = useUser();
+  const history = useHistory();
 
-  console.log(userContext.userDetails);
+  const { userDetails } = useUser();
+
+  //   console.log(userDetails.userState);
+
+  useEffect(() => fetchProfileData(), [userDetails]);
+  const fetchProfileData = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_URL}/user/me`, {
+        headers: { Authorization: `Bearer ${userDetails.userState.token}` },
+      });
+      console.log(res.data);
+      if (res.data.status) {
+        setUserData(res.data.user);
+      } else {
+        setError(res.data.message);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
 
   const {
     register,
@@ -23,11 +51,8 @@ const ChangePasswordLayout = ({ props }) => {
     formState: { errors },
   } = useForm();
 
-  const headers = {
-    Authorization: `Bearer ${userContext.userDetails.userState.token}`,
-  };
-
   const onSubmit = async (data) => {
+    console.log(data);
     setIsLoading(true);
     setError("");
 
@@ -42,20 +67,32 @@ const ChangePasswordLayout = ({ props }) => {
       {
         ...data,
       },
-      { headers }
+      { headers: { Authorization: `Bearer ${userDetails.userState.token}` } }
     );
     console.log(res.data);
+    if (res.data.status) {
+      setResponseMessage({
+        success: res.data.message,
+      });
+      setTimeout(() => {
+        history.push("/");
+      }, 3000);
+    } else {
+      setResponseMessage({
+        err: res.data.message,
+      });
+    }
     setIsLoading(false);
   };
   return (
     <Container {...props}>
+      <Sidebar />
+
       <Box ml="20rem">
         <Flex mt="2.3rem" justifyContent="flex-end">
-          <Username />
+          <Username username={userData.name} />
         </Flex>
-        <Flex alignItems="flex-end" justifyContent="space-between">
-          <Avatar />
-        </Flex>
+
         <Box mt="2.5rem">
           <Text mb="2rem" as="p" fontSize="heading">
             Change Password
@@ -69,7 +106,11 @@ const ChangePasswordLayout = ({ props }) => {
               errors={errors}
               required
             />
-            {}
+            {responseMessage.err && (
+              <Text mb="2rem" as="p" color="error" fontSize="error">
+                {responseMessage.err}
+              </Text>
+            )}
             <FormInput
               label="New Password"
               register={register}
@@ -94,6 +135,12 @@ const ChangePasswordLayout = ({ props }) => {
             <Button disabled={isLoading} mb="2rem">
               Change Password
             </Button>
+
+            {responseMessage.success && (
+              <Text mb="2rem" color="green" as="p" fontSize="text">
+                {responseMessage.success}
+              </Text>
+            )}
           </Box>
         </Box>
       </Box>
