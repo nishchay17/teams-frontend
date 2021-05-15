@@ -1,5 +1,43 @@
-.task-box {
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
+
+.assigned {
+  border-color: #e14d59;
+  width: 18rem;
+}
+
+.in-progress {
+  border-color: #fdc960;
+  width: 18rem;
+}
+
+.completed {
   border-color: #00d998;
   width: 18rem;
-  height: 27rem;
+}
+
+.bg-primary {
+  background-color: #c0ebf5 !important;
+}
+
+.assignInfo {
+  font-size: 14px;
+  color: rgb(143, 141, 141);
+  font-family: "Roboto", sans-serif;
+}
+
+.task-count-circle {
+  min-width: 30px;
+  padding: 0 5px;
+  height: 30px;
+  background: #e14d59 0% 0% no-repeat padding-box;
+  border-radius: 68px;
+  opacity: 1;
+  justify-content: center;
+  color: #ffffff !important;
+  font-weight: 500;
+  line-height: 30px;
+  font-family: Roboto;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
 }

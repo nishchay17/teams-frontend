@@ -7,6 +7,7 @@ import { useUser } from "../../Provider/UserProvider";
 import Container from "../library/Container";
 import Sidebar from "../library/Sidebar";
 import Username from "../library/Username";
+import moment from "moment";
 
 const TaskDescription = ({ props }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +42,6 @@ const TaskDescription = ({ props }) => {
     }
   };
   const getTaskDescription = async () => {
-    // if (!userDetails.userState.token) history.push("/");
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_URL}/task/get/${id}`,
@@ -61,31 +61,16 @@ const TaskDescription = ({ props }) => {
     }
   };
 
-  const ConvertDateTime = () => {
-    var date = new Date(Description.assignedDate);
-
-    setAssignedOnDateTime(
-      date.getDate() +
-        "/" +
-        (date.getMonth() + 1) +
-        "/" +
-        date.getFullYear() +
-        " " +
-        date.getHours() +
-        ":" +
-        date.getMinutes() +
-        ":" +
-        date.getSeconds()
-    );
+  const getDate = (assignDate) => {
+    let date;
+    date = moment(assignDate).format("MMMM D, YYYY");
+    return date;
   };
   useEffect(() => {
     fetchProfileData();
     getTaskDescription();
   }, [userDetails]);
 
-  useEffect(() => {
-    ConvertDateTime();
-  }, [Description]);
   return (
     <Container {...props}>
       <Sidebar />
@@ -98,13 +83,86 @@ const TaskDescription = ({ props }) => {
             Task Description
           </Text>
         </Box>
-        <Box>
-          <Text mb="2rem" as="p" fontSize="subheading">
-            Assigned Date -
-          </Text>
-          <Text mb="2rem" as="p" fontSize="text">
-            {AssignedOnDateTime}
-          </Text>
+        <Box
+          bg="cardbg"
+          sx={{
+            borderRadius: "0.5rem",
+          }}
+          py="0.5rem"
+          px="2rem"
+        >
+          <Flex justifyContent="space-between">
+            <Box>
+              <Text mb="2rem" as="p" fontSize="subheading">
+                Assigned Date -
+              </Text>
+              <Text mb="2rem" as="p" fontSize="text">
+                {getDate(Description.assignedDate)}
+              </Text>
+            </Box>
+            <Box>
+              <Text mb="2rem" as="p" fontSize="subheading">
+                Due Date -
+              </Text>
+              <Text mb="2rem" as="p" fontSize="text">
+                {getDate(Description.completionDate)}
+              </Text>
+            </Box>
+          </Flex>
+          <Flex justifyContent="space-between">
+            <Box>
+              <Text mb="2rem" as="p" fontSize="subheading">
+                Assigned By -
+              </Text>
+              <Text mb="2rem" as="p" fontSize="text">
+                {Description.assignedBy}
+              </Text>
+            </Box>
+            <Box>
+              <Text mb="2rem" as="p" fontSize="subheading">
+                Todays Date -
+              </Text>
+              <Text mb="2rem" as="p" fontSize="text">
+                {getDate(Description.inProgressDate)}
+              </Text>
+            </Box>
+          </Flex>
+          <Flex alignItems="center" justifyContent="space-between">
+            <Box>
+              <Text mb="2rem" as="p" fontSize="subheading">
+                Task Name -
+              </Text>
+              <Text mb="2rem" as="p" fontSize="text">
+                {Description.name}
+              </Text>
+            </Box>
+            <Box>
+              <Text textAlign="center" mb="2rem" as="p" fontSize="subheading">
+                Status -
+              </Text>
+              <Text
+                px="2rem"
+                sx={{
+                  borderRadius: "0.25rem",
+                  boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                }}
+                py="0.5rem"
+                bg="green"
+                as="p"
+                fontSize="text"
+              >
+                {Description.status}
+              </Text>
+            </Box>
+          </Flex>
+          <Box>
+            <Text mb="2rem" as="p" fontSize="subheading">
+              Description -
+            </Text>
+            <Text mb="2rem" as="p" fontSize="text">
+              {Description.description}
+            </Text>
+          </Box>
         </Box>
       </Box>
     </Container>

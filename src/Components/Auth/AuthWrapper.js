@@ -13,7 +13,7 @@ function AuthWrapper({ children }) {
   console.log();
   useEffect(() => {
     if (userContext.userDetails.userState.token) {
-      history.push("/profile");
+      history.push("/tasks");
     }
   }, [userContext.userDetails]);
 
