@@ -9,7 +9,7 @@ import LoginLayout from "./Components/Auth/Login/LoginLayout";
 import SignupLayout from "./Components/Auth/Signup/SignupLayout";
 import Profile from "./Components/Modules/Profile";
 import Tasks from "./Components/Modules/Tasks";
-import ChangePasswordLayout from "./Components/Profile/ChangePasswordLayout";
+import ChangePasswordLayout from "./Components/Modules/ChangePasswordLayout";
 
 function App() {
   const location = useLocation();
@@ -31,7 +31,7 @@ function App() {
               <Profile />
             </Route>
             <Route path="/tasks" exact>
-              <Tasks />
+              {/* <Tasks /> */}
             </Route>
             <Route path="/change-password" exact>
               <ChangePasswordLayout />
