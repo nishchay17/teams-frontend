@@ -115,14 +115,14 @@ function LoginLayout() {
               <Button disabled={isLoading}>Login</Button>
             </Box>
           </motion.div>
-          <motion.div variants={item}>
+          {/* <motion.div variants={item}>
             <Text mt="2rem">
               Forgot password?{" "}
               <Link color="link" sx={{ cursor: "pointer" }}>
                 reset password
               </Link>
             </Text>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </Flex>
     </AuthWrapper>
