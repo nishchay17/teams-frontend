@@ -40,7 +40,8 @@ function LoginLayout() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data.password.length);
+    console.log(data);
+
     if (data.password.length < 6) {
       setError("Password lenght should be more than 5");
       return;
@@ -56,7 +57,8 @@ function LoginLayout() {
         type: "USER_LOGIN",
         user: res.data,
       });
-      history.push("/profile");
+      console.log(res.data);
+      history.push("/tasks");
     } else {
       setError("Wrong Credentials");
     }

@@ -7,13 +7,24 @@ import Sidebar from "../library/Sidebar";
 import { useUser } from "../../Provider/UserProvider";
 import { useHistory } from "react-router";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import moment from "moment";
 
 const Tasks = () => {
   const [task, setTask] = useState(null);
+  const [assignCount, setAssignCount] = useState(0);
+  const [progressCount, setProgressCount] = useState(0);
+  const [completedCount, setCompletedCount] = useState(0);
   const history = useHistory();
   const { userDetails } = useUser();
 
   useEffect(() => getTasks(), [userDetails]);
+
+  useEffect(() => {
+    setAssignCount(task?.taskAssigned.length);
+    setProgressCount(task?.taskInProgress.length);
+    setCompletedCount(task?.taskCompleted.length);
+  }, [task]);
+
   const getTasks = async () => {
     if (!userDetails.userState.token) history.push("/");
     try {
@@ -21,6 +32,7 @@ const Tasks = () => {
         headers: { Authorization: `Bearer ${userDetails.userState.token}` },
       });
       const data = res.data.user;
+      console.log(data);
       setTask(data);
     } catch (error) {
       console.log(error);
@@ -64,10 +76,19 @@ const Tasks = () => {
         ...pre[destination.droppableId],
         taskToBeMoved,
       ];
+      setAssignCount(pre.taskAssigned.length);
+      setProgressCount(pre.taskInProgress.length);
+      setCompletedCount(pre.taskCompleted.length);
       return pre;
     });
     updateTaskStatus(destination.droppableId, draggableId);
     // console.log(taskToBeMoved);
+  };
+
+  const getDate = (assignDate) => {
+    let date;
+    date = moment(assignDate).format("MMMM D, YYYY");
+    return date;
   };
 
   return (
@@ -78,18 +99,20 @@ const Tasks = () => {
           <Username />
         </div>
         <h3 className="mt-5 offset-md-3">
-          <u style={{ textDecorationColor: "#facf5a" }}>Your Tasks</u>
+          <u style={{ textDecorationColor: "#FDC960" }}>Your Tasks</u>
         </h3>
         <DragDropContext onDragEnd={onDragEnd}>
-          <Row className="offset-md-3">
+          <Row className="offset-md-3 mt-4">
             <Col sm={4}>
-              <Card className="task-box">
-                <Card.Body>
-                  <Card.Title>Assigned</Card.Title>
+              <Card className="assigned">
+                <Card.Body style={{ width: "100%", height: "100%" }}>
+                  <Card.Title>
+                    Assigned{" "}
+                    <span className="task-count-circle">{assignCount}</span>
+                  </Card.Title>
                   <Droppable
                     droppableId="taskAssigned"
-                    width="100%"
-                    height="100%"
+                    style={{ width: "100%", height: "10rem" }}
                   >
                     {(provided, snapshot) => (
                       <div ref={provided.innerRef}>
@@ -105,7 +128,22 @@ const Tasks = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                {item.name}
+                                <Card className="bg-primary mt-3">
+                                  <Card.Body>
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <span className="assignInfo">
+                                      Assigned by {item.assignedBy.name} on{" "}
+                                      {getDate(item.createdAt)}
+                                    </span>
+                                    <br />
+                                    <a
+                                      href="/task-detail"
+                                      style={{ color: "blue" }}
+                                    >
+                                      Know more...
+                                    </a>
+                                  </Card.Body>
+                                </Card>
                               </div>
                             )}
                           </Draggable>
@@ -118,9 +156,12 @@ const Tasks = () => {
               </Card>
             </Col>
             <Col sm={4}>
-              <Card className="task-box">
+              <Card className="in-progress">
                 <Card.Body>
-                  <Card.Title>In Progress</Card.Title>
+                  <Card.Title>
+                    In Progress{" "}
+                    <span className="task-count-circle">{progressCount}</span>
+                  </Card.Title>
                   <Droppable
                     droppableId="taskInProgress"
                     width="100%"
@@ -140,7 +181,22 @@ const Tasks = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                {item.name}
+                                <Card className="bg-primary mt-3">
+                                  <Card.Body>
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <span className="assignInfo">
+                                      Assigned by {item.assignedBy.name} on{" "}
+                                      {getDate(item.createdAt)}
+                                    </span>
+                                    <br />
+                                    <a
+                                      href="/task-detail"
+                                      style={{ color: "blue" }}
+                                    >
+                                      Know more...
+                                    </a>
+                                  </Card.Body>
+                                </Card>
                               </div>
                             )}
                           </Draggable>
@@ -153,9 +209,12 @@ const Tasks = () => {
               </Card>
             </Col>
             <Col sm={2}>
-              <Card className="task-box">
+              <Card className="completed">
                 <Card.Body>
-                  <Card.Title>Complete</Card.Title>
+                  <Card.Title>
+                    Complete{" "}
+                    <span className="task-count-circle">{completedCount}</span>
+                  </Card.Title>
                   <Droppable
                     droppableId="taskCompleted"
                     width="100%"
@@ -175,7 +234,22 @@ const Tasks = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                {item.name}
+                                <Card className="bg-primary mt-3">
+                                  <Card.Body>
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <span className="assignInfo">
+                                      Assigned by {item.assignedBy.name} on{" "}
+                                      {getDate(item.createdAt)}
+                                    </span>
+                                    <br />
+                                    <a
+                                      href="/task-detail"
+                                      style={{ color: "blue" }}
+                                    >
+                                      Know more...
+                                    </a>
+                                  </Card.Body>
+                                </Card>
                               </div>
                             )}
                           </Draggable>

@@ -53,7 +53,7 @@ const SignupLayout = () => {
           type: "USER_LOGIN",
           user: res.data,
         });
-        history.push("/profile");
+        history.push("/tasks");
       } else {
         setError(res.data.message);
       }
