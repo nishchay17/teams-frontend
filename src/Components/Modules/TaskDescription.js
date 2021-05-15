@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Box, Flex, Text } from "rebass";
 import { useUser } from "../../Provider/UserProvider";
 
 import Container from "../library/Container";
-import Sidebar from "../library/Sidebar";
 import Username from "../library/Username";
 import moment from "moment";
 
@@ -14,10 +13,8 @@ const TaskDescription = () => {
   const [error, setError] = useState("");
   const [userData, setUserData] = useState({});
   const [Description, setDescription] = useState({});
-  const [AssignedOnDateTime, setAssignedOnDateTime] = useState();
 
   const { userDetails } = useUser();
-  const history = useHistory();
 
   const { id } = useParams();
 

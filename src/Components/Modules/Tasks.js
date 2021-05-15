@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import moment from "moment";
-import { Card, Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 
 import "./module.css";
 import Username from "../library/Username";
-import Sidebar from "../library/Sidebar";
 import { useUser } from "../../Provider/UserProvider";
 
 const Tasks = () => {

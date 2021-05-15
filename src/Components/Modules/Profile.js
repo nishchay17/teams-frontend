@@ -4,14 +4,13 @@ import axios from "axios";
 
 import Avatar from "../library/Avatar";
 import Container from "../library/Container";
-import Logo from "../library/Logo";
-import Sidebar from "../library/Sidebar";
 import { useHistory } from "react-router";
 
 import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
+import Loader from "../library/Loader";
 
-const Profile = ({ username, teamName, email, empId, props }) => {
+const Profile = () => {
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -40,7 +39,7 @@ const Profile = ({ username, teamName, email, empId, props }) => {
   };
 
   return (
-    <Container {...props}>
+    <Container>
       <Box>
         {isLoading ? (
           <Flex
@@ -49,7 +48,7 @@ const Profile = ({ username, teamName, email, empId, props }) => {
             width="100%"
             height="100vh"
           >
-            <Text fontSize="1.5rem">Loading...</Text>
+            <Loader />
           </Flex>
         ) : (
           <>
@@ -66,7 +65,7 @@ const Profile = ({ username, teamName, email, empId, props }) => {
             </Flex>
             <Box mt="4rem">
               <Text mb="2rem" as="p" fontSize="heading">
-                Personal information
+                Information
               </Text>
               <Flex>
                 <Box>

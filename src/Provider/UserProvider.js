@@ -55,7 +55,7 @@ function UserProvider(props) {
 
   useEffect(() => {
     syncWithStorage();
-  }, [userDetails]);
+  }, [userDetails, syncWithStorage]);
 
   return (
     <user.Provider value={{ userDetails, dispatch }}>
