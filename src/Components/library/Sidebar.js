@@ -1,15 +1,12 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { useHistory } from "react-router-dom";
-import { GoTasklist } from "react-icons/go";
-import { RiShoppingBasketLine } from "react-icons/ri";
-import { CgProfile } from "react-icons/cg";
-import { AiOutlineLogout } from "react-icons/ai";
+import { VscCheck, VscFiles, VscAccount, VscKey } from "react-icons/vsc";
 
 import Logo from "./Logo";
 import { useUser } from "../../Provider/UserProvider";
 
-function Sidebar() {
+function Sidebar({ children }) {
   const history = useHistory();
 
   const userContext = useUser();
@@ -19,18 +16,30 @@ function Sidebar() {
       <Flex
         as="a"
         alignItems="center"
-        mb="1.5rem"
-        sx={{ cursor: "pointer" }}
+        mb="0.5rem"
+        p="0.5rem"
+        sx={{
+          borderRadius: "5px",
+          cursor: "pointer",
+          textDecoration: "none",
+          ":hover": {
+            background: "primary",
+          },
+        }}
+        bg={to === history.location.pathname ? "primary" : ""}
         onClick={() => history.push(to)}
         {...props}
       >
         <Box
           as={Icon}
-          color={to === history.location.pathname ? "primary" : "white"}
-          size="1.5rem"
+          color={to === history.location.pathname ? "black" : "white"}
+          size="1.4rem"
           mr="1rem"
         />
-        <Text color={to === history.location.pathname ? "primary" : "white"}>
+        <Text
+          fontWeight="400"
+          color={to === history.location.pathname ? "black" : "white"}
+        >
           {name}
         </Text>
       </Flex>
@@ -38,35 +47,40 @@ function Sidebar() {
   }
 
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        left: 0,
-        top: 0,
-        bottom: 0,
-      }}
-      width="20rem"
-      bg="sidebarbg"
-      px="4rem"
-      py="2rem"
-    >
-      <Logo color="white" />
-      <Flex flexDirection="column" height="100%" py="5rem">
-        <NavItem Icon={RiShoppingBasketLine} name="Basket" to="/basket" />
-        <NavItem Icon={CgProfile} name="Profile" to="/profile" />
-        <NavItem Icon={GoTasklist} name="Tasks" to="/tasks" />
-        <NavItem
-          Icon={AiOutlineLogout}
-          name="Logout"
-          onClick={() => {
-            userContext?.dispatch({
-              type: "USER_LOGOUT",
-            });
-            history.push("/");
-          }}
-          mt="auto"
-        />
-      </Flex>
+    <Box>
+      <Box
+        sx={{
+          position: "fixed",
+          left: 0,
+          top: 0,
+          bottom: 0,
+        }}
+        width="17%"
+        bg="sidebarbg"
+        px="3rem"
+        py="2rem"
+      >
+        <Logo color="white" noAnimation />
+        <Flex flexDirection="column" height="100%" py="5rem">
+          <NavItem Icon={VscFiles} name="Basket" to="/basket" />
+          <NavItem Icon={VscAccount} name="Profile" to="/profile" />
+          <NavItem Icon={VscCheck} name="Tasks" to="/tasks" />
+          {/* ADD ADMIN's routes here */}
+          {userContext?.userDetails.userState.isAdmin && <></>}
+          <NavItem
+            Icon={VscKey}
+            name="Logout"
+            onClick={() => {
+              userContext?.dispatch({
+                type: "USER_LOGOUT",
+              });
+              history.push("/");
+            }}
+            mt="auto"
+          />
+        </Flex>
+      </Box>
+      <Box ml="17%">{children}</Box>
     </Box>
   );
 }

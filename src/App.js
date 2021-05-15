@@ -17,6 +17,7 @@ import Profile from "./Components/Modules/Profile";
 import Tasks from "./Components/Modules/Tasks";
 import ChangePasswordLayout from "./Components/Modules/ChangePasswordLayout";
 import TaskDescription from "./Components/Modules/TaskDescription";
+import Sidebar from "./Components/library/Sidebar";
 
 function IsLoggedIn() {
   const { userDetails } = useUser();
@@ -40,22 +41,24 @@ function App() {
             <Route path="/signup" exact>
               <SignupLayout />
             </Route>
-            <Route path="/profile" exact>
-              {IsLoggedIn ? <Profile /> : <Redirect to={"/login"} />}
-            </Route>
-            <Route path="/tasks" exact>
-              {IsLoggedIn ? <Tasks /> : <Redirect to={"/login"} />}
-            </Route>
-            <Route path="/change-password" exact>
-              {IsLoggedIn ? (
-                <ChangePasswordLayout />
-              ) : (
-                <Redirect to={"/login"} />
-              )}
-            </Route>
-            <Route path="/tasks/:id" exact>
-              {IsLoggedIn ? <TaskDescription /> : <Redirect to={"/login"} />}
-            </Route>
+            <Sidebar>
+              <Route path="/profile" exact>
+                {IsLoggedIn ? <Profile /> : <Redirect to={"/login"} />}
+              </Route>
+              <Route path="/tasks" exact>
+                {IsLoggedIn ? <Tasks /> : <Redirect to={"/login"} />}
+              </Route>
+              <Route path="/change-password" exact>
+                {IsLoggedIn ? (
+                  <ChangePasswordLayout />
+                ) : (
+                  <Redirect to={"/login"} />
+                )}
+              </Route>
+              <Route path="/tasks/:id" exact>
+                {IsLoggedIn ? <TaskDescription /> : <Redirect to={"/login"} />}
+              </Route>
+            </Sidebar>
           </Switch>
         </AnimatePresence>
       </UserProvider>

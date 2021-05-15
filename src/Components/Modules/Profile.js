@@ -41,8 +41,7 @@ const Profile = ({ username, teamName, email, empId, props }) => {
 
   return (
     <Container {...props}>
-      <Sidebar />
-      <Box ml="20rem">
+      <Box>
         {isLoading ? (
           <Flex
             alignItems="center"

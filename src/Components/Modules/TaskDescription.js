@@ -9,7 +9,7 @@ import Sidebar from "../library/Sidebar";
 import Username from "../library/Username";
 import moment from "moment";
 
-const TaskDescription = ({ props }) => {
+const TaskDescription = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [userData, setUserData] = useState({});
@@ -72,9 +72,8 @@ const TaskDescription = ({ props }) => {
   }, [userDetails]);
 
   return (
-    <Container {...props}>
-      <Sidebar />
-      <Box ml="20rem">
+    <Container>
+      <Box>
         <Flex mt="2.3rem" justifyContent="flex-end">
           <Username username={userData.name} />
         </Flex>
@@ -100,14 +99,6 @@ const TaskDescription = ({ props }) => {
                 {getDate(Description.assignedDate)}
               </Text>
             </Box>
-            <Box>
-              <Text mb="2rem" as="p" fontSize="subheading">
-                Due Date -
-              </Text>
-              <Text mb="2rem" as="p" fontSize="text">
-                {getDate(Description.completionDate)}
-              </Text>
-            </Box>
           </Flex>
           <Flex justifyContent="space-between">
             <Box>
@@ -115,7 +106,7 @@ const TaskDescription = ({ props }) => {
                 Assigned By -
               </Text>
               <Text mb="2rem" as="p" fontSize="text">
-                {Description.assignedBy}
+                {Description.assignedBy?.name}
               </Text>
             </Box>
             <Box>

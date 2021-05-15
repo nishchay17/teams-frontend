@@ -2,15 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Button, Flex, Text } from "rebass";
+import { useHistory } from "react-router";
 
 import FormInput from "../Form/FormInput";
 import Container from "../library/Container";
 import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
-import Sidebar from "../library/Sidebar";
-import { useHistory } from "react-router";
 
-const ChangePasswordLayout = ({ props }) => {
+const ChangePasswordLayout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState({});
   const [error, setError] = useState("");
@@ -20,12 +19,8 @@ const ChangePasswordLayout = ({ props }) => {
   });
 
   const history = useHistory();
-
   const { userDetails } = useUser();
 
-  //   console.log(userDetails.userState);
-
-  useEffect(() => fetchProfileData(), [userDetails]);
   const fetchProfileData = async () => {
     setIsLoading(true);
 
@@ -44,6 +39,7 @@ const ChangePasswordLayout = ({ props }) => {
       setIsLoading(false);
     }
   };
+  useEffect(() => fetchProfileData(), [userDetails, fetchProfileData]);
 
   const {
     register,
@@ -85,10 +81,8 @@ const ChangePasswordLayout = ({ props }) => {
     setIsLoading(false);
   };
   return (
-    <Container {...props}>
-      <Sidebar />
-
-      <Box ml="20rem">
+    <Container>
+      <Box>
         <Flex mt="2.3rem" justifyContent="flex-end">
           <Username username={userData.name} />
         </Flex>
