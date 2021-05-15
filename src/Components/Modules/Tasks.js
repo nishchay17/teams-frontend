@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./module.css";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
-import Avatar from "../library/Avatar";
+import Username from "../library/Username";
 import Sidebar from "../library/Sidebar";
 import { useUser } from "../../Provider/UserProvider";
 import { useHistory } from "react-router";
@@ -20,49 +20,84 @@ const Tasks = () => {
       const res = await axios.get(`${process.env.REACT_APP_URL}/user/me`, {
         headers: { Authorization: `Bearer ${userDetails.userState.token}` },
       });
-      console.log(res);
-      let count = 0;
-      res.data.user.taskAssigned.map((tasks) => {
-        tasks.index = count;
-        count++;
-      });
-      res.data.user.taskInProgress.map((tasks) => {
-        tasks.index = count;
-        count++;
-      });
-      res.data.user.taskCompleted.map((tasks) => {
-        tasks.index = count;
-        count++;
-      });
-      setTask(res.data.user);
+      const data = res.data.user;
+      setTask(data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const updateTaskStatus = async (typeIncoming, id) => {
+    if (!typeIncoming || !id) return;
+    let type = "";
+    if (typeIncoming === "taskAssigned") type = "isAssigned";
+    else if (typeIncoming === "taskInProgress") type = "inProcess";
+    else if (typeIncoming === "taskCompleted") type = "isCompleted";
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_URL}/task/${type}/${id}`,
+        {
+          headers: { Authorization: `Bearer ${userDetails.userState.token}` },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onDragEnd = (result) => {
+    const { source, destination, draggableId } = result;
+    console.log(result);
+    // dropped outside the list
+    if (!destination) {
+      return;
+    }
+    let taskToBeMoved = {};
+    task[source.droppableId].map((t) => {
+      if (t._id === draggableId) taskToBeMoved = t;
+    });
+    setTask((pre) => {
+      pre[source.droppableId] = pre[source.droppableId].filter((t) => {
+        if (t._id !== draggableId) return t;
+      });
+      pre[destination.droppableId] = [
+        ...pre[destination.droppableId],
+        taskToBeMoved,
+      ];
+      return pre;
+    });
+    updateTaskStatus(destination.droppableId, draggableId);
+    // console.log(taskToBeMoved);
+  };
+
   return (
     <div>
       <Container>
         <Sidebar />
-        <div className="offset-md-10 pr-0">
-          <Avatar />
+        <div className="offset-md-11 pr-0 mt-3">
+          <Username />
         </div>
         <h3 className="mt-5 offset-md-3">
           <u style={{ textDecorationColor: "#facf5a" }}>Your Tasks</u>
         </h3>
-        <DragDropContext>
+        <DragDropContext onDragEnd={onDragEnd}>
           <Row className="offset-md-3">
             <Col sm={4}>
               <Card className="task-box">
                 <Card.Body>
                   <Card.Title>Assigned</Card.Title>
-                  <Droppable droppableId="assigned">
+                  <Droppable
+                    droppableId="taskAssigned"
+                    width="100%"
+                    height="100%"
+                  >
                     {(provided, snapshot) => (
                       <div ref={provided.innerRef}>
                         {task?.taskAssigned.map((item, index) => (
                           <Draggable
                             key={item._id}
                             draggableId={item._id}
-                            index={0}
+                            index={index}
                           >
                             {(provided, snapshot) => (
                               <div
@@ -70,7 +105,7 @@ const Tasks = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                {item.description}
+                                {item.name}
                               </div>
                             )}
                           </Draggable>
@@ -86,14 +121,18 @@ const Tasks = () => {
               <Card className="task-box">
                 <Card.Body>
                   <Card.Title>In Progress</Card.Title>
-                  <Droppable droppableId="inProgress">
+                  <Droppable
+                    droppableId="taskInProgress"
+                    width="100%"
+                    height="100%"
+                  >
                     {(provided, snapshot) => (
                       <div ref={provided.innerRef}>
                         {task?.taskInProgress.map((item, index) => (
                           <Draggable
                             key={item._id}
                             draggableId={item._id}
-                            index={1}
+                            index={index + task?.taskAssigned.length}
                           >
                             {(provided, snapshot) => (
                               <div
@@ -101,7 +140,7 @@ const Tasks = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                {item.description}
+                                {item.name}
                               </div>
                             )}
                           </Draggable>
@@ -117,14 +156,18 @@ const Tasks = () => {
               <Card className="task-box">
                 <Card.Body>
                   <Card.Title>Complete</Card.Title>
-                  <Droppable droppableId="inProgress">
+                  <Droppable
+                    droppableId="taskCompleted"
+                    width="100%"
+                    height="100%"
+                  >
                     {(provided, snapshot) => (
                       <div ref={provided.innerRef}>
                         {task?.taskCompleted.map((item, index) => (
                           <Draggable
                             key={item._id}
                             draggableId={item._id}
-                            index={2}
+                            index={index + task?.taskInProgress.length}
                           >
                             {(provided, snapshot) => (
                               <div
@@ -132,7 +175,7 @@ const Tasks = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                {item.description}
+                                {item.name}
                               </div>
                             )}
                           </Draggable>

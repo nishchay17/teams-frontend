@@ -31,7 +31,7 @@ function App() {
               <Profile />
             </Route>
             <Route path="/tasks" exact>
-              {/* <Tasks /> */}
+              <Tasks />
             </Route>
             <Route path="/change-password" exact>
               <ChangePasswordLayout />
