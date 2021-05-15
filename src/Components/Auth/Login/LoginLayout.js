@@ -70,9 +70,9 @@ function LoginLayout() {
         height="100vh"
         justifyContent="center"
         flexDirection="column"
-        width="55%"
+        width={{ xs: "100%", sm: "55%" }}
       >
-        <Logo mb="5rem" />
+        <Logo mb={{ xs: "3rem", sm: "5rem" }} />
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.div variants={item}>
             <Text as="h1" fontSize="heading" fontWeight="500">

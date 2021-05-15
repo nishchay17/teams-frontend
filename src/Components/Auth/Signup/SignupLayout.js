@@ -79,12 +79,13 @@ const SignupLayout = () => {
   return (
     <AuthWrapper>
       <Flex
-        height="100vh"
+        height={{ xs: "auto", sm: "100vh" }}
         justifyContent="center"
         flexDirection="column"
-        width="55%"
+        my={{ xs: "3rem", sm: 0 }}
+        width={{ xs: "100%", sm: "55%" }}
       >
-        <Logo mb="5rem" />
+        <Logo mb={{ xs: "3rem", sm: "5rem" }} />
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.div variants={item}>
             <Text as="h1" fontSize="heading" fontWeight="500">
@@ -106,7 +107,7 @@ const SignupLayout = () => {
           <motion.div variants={item}>
             {isJoiningIdChecked ? (
               <Box as="form" mt="2rem" onSubmit={handleSubmit(onSubmit)}>
-                <Flex>
+                <Flex flexDirection={{ xs: "column", sm: "row" }}>
                   <FormInput
                     label="Name"
                     register={register}
@@ -115,7 +116,7 @@ const SignupLayout = () => {
                     required
                   />
                   <FormInput
-                    ml="1.5rem"
+                    ml={{ xs: 0, sm: "1.5rem" }}
                     label="Password"
                     register={register}
                     name="password"
@@ -123,7 +124,7 @@ const SignupLayout = () => {
                     required
                   />
                 </Flex>
-                <Flex>
+                <Flex flexDirection={{ xs: "column", sm: "row" }}>
                   <FormInput
                     label="Email"
                     register={register}
@@ -132,7 +133,7 @@ const SignupLayout = () => {
                     required
                   />
                   <FormInput
-                    ml="1.5rem"
+                    ml={{ xs: 0, sm: "1.5rem" }}
                     label="Re-enter Password"
                     register={register}
                     type="password"
@@ -141,7 +142,7 @@ const SignupLayout = () => {
                     required
                   />
                 </Flex>
-                <Flex>
+                <Flex flexDirection={{ xs: "column", sm: "row" }}>
                   <FormInput
                     label="Mobile number"
                     register={register}
@@ -150,7 +151,7 @@ const SignupLayout = () => {
                     required
                   />
                   <FormInput
-                    ml="1.5rem"
+                    ml={{ xs: 0, sm: "1.5rem" }}
                     label="Joining Id"
                     register={register}
                     name="joiningId"

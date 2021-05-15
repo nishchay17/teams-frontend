@@ -21,6 +21,7 @@ function AuthWrapper({ children }) {
     <motion.div exit={{ opacity: 0 }}>
       <Flex
         width="45%"
+        display={{ xs: "none", sm: "flex" }}
         height="100vh"
         bg="authbg"
         alignItems="center"
