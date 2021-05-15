@@ -10,6 +10,7 @@ import SignupLayout from "./Components/Auth/Signup/SignupLayout";
 import Profile from "./Components/Modules/Profile";
 import Tasks from "./Components/Modules/Tasks";
 import ChangePasswordLayout from "./Components/Modules/ChangePasswordLayout";
+import TaskDescription from "./Components/Modules/TaskDescription";
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/change-password" exact>
               <ChangePasswordLayout />
+            </Route>
+            <Route path="/tasks/:id" exact>
+              <TaskDescription />
             </Route>
           </Switch>
         </AnimatePresence>
