@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./module.css";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useHistory } from "react-router";
+import moment from "moment";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
+
+import "./module.css";
 import Username from "../library/Username";
 import Sidebar from "../library/Sidebar";
 import { useUser } from "../../Provider/UserProvider";
-import { useHistory } from "react-router";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import moment from "moment";
 
 const Tasks = () => {
   const [task, setTask] = useState(null);
@@ -46,12 +47,9 @@ const Tasks = () => {
     else if (typeIncoming === "taskInProgress") type = "inProcess";
     else if (typeIncoming === "taskCompleted") type = "isCompleted";
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_URL}/task/${type}/${id}`,
-        {
-          headers: { Authorization: `Bearer ${userDetails.userState.token}` },
-        }
-      );
+      await axios.get(`${process.env.REACT_APP_URL}/task/${type}/${id}`, {
+        headers: { Authorization: `Bearer ${userDetails.userState.token}` },
+      });
     } catch (err) {
       console.log(err);
     }
@@ -59,7 +57,6 @@ const Tasks = () => {
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId } = result;
-    console.log(result);
     // dropped outside the list
     if (!destination) {
       return;
