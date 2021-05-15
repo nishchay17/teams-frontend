@@ -11,7 +11,7 @@ import { useHistory } from "react-router";
 import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
 
-const ProfileLayout = ({ username, teamName, email, empId, props }) => {
+const Profile = ({ username, teamName, email, empId, props }) => {
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -120,11 +120,11 @@ const ProfileLayout = ({ username, teamName, email, empId, props }) => {
   );
 };
 
-ProfileLayout.defaultProps = {
+Profile.defaultProps = {
   username: "Sachin",
   teamName: "Front End",
   email: "sachinpasi2000@gmail.com",
   empId: "#oih3-23",
 };
 
-export default ProfileLayout;
+export default Profile;
