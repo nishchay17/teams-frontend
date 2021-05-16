@@ -41,3 +41,16 @@
   text-align: center;
   display: inline-block;
 }
+
+.addTask {
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.select-employee {
+  width: 20rem;
+}
+
+.add-task-btn {
+  margin-left: 50rem;
+}

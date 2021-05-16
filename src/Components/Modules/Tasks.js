@@ -130,12 +130,7 @@ const Tasks = () => {
                                     {getDate(item.createdAt)}
                                   </span>
                                   <br />
-                                  <a
-                                    href={`/tasks/${item._id} `}
-                                    style={{ color: "blue" }}
-                                  >
-                                    Know more...
-                                  </a>
+                                  <a href={`/tasks/${item._id} `}>More...</a>
                                 </Card.Body>
                               </Card>
                             </div>
@@ -185,9 +180,9 @@ const Tasks = () => {
                                   <br />
                                   <a
                                     href={`/tasks/${item._id} `}
-                                    style={{ color: "blue" }}
+                                    style={{ color: "black" }}
                                   >
-                                    Know more...
+                                    More...
                                   </a>
                                 </Card.Body>
                               </Card>
@@ -238,9 +233,9 @@ const Tasks = () => {
                                   <br />
                                   <a
                                     href={`/tasks/${item._id} `}
-                                    style={{ color: "blue" }}
+                                    style={{ color: "black" }}
                                   >
-                                    Know more...
+                                    More...
                                   </a>
                                 </Card.Body>
                               </Card>

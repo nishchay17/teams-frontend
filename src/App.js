@@ -18,15 +18,29 @@ import Tasks from "./Components/Modules/Tasks";
 import ChangePasswordLayout from "./Components/Modules/ChangePasswordLayout";
 import TaskDescription from "./Components/Modules/TaskDescription";
 import Sidebar from "./Components/library/Sidebar";
+import AddTask from "./Components/Modules/Admin/AddTask";
 
-function IsLoggedIn() {
-  const { userDetails } = useUser();
-  if (userDetails.userState.token) return true;
-  else return false;
-}
-
-function App() {
+const App = () => {
   const location = useLocation();
+
+  const IsLoggedIn = () => {
+    const { userDetails } = useUser();
+    if (userDetails.userState.token) return true;
+    else return false;
+  };
+
+  const IsAdmin = () => {
+    const { userDetails } = useUser();
+    if (userDetails.userState.isAdmin) return true;
+    else return false;
+  };
+
+  const Home = () => {
+    const history = useHistory();
+    useEffect(() => history.push("/login"), []);
+    return <></>;
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <UserProvider>
@@ -58,18 +72,19 @@ function App() {
               <Route path="/tasks/:id" exact>
                 {IsLoggedIn ? <TaskDescription /> : <Redirect to={"/login"} />}
               </Route>
+              <Route path="/add-task" exact>
+                {IsLoggedIn && IsAdmin ? (
+                  <AddTask />
+                ) : (
+                  <Redirect to={"/login"} />
+                )}
+              </Route>
             </Sidebar>
           </Switch>
         </AnimatePresence>
       </UserProvider>
     </ThemeProvider>
   );
-}
-
-function Home() {
-  const history = useHistory();
-  useEffect(() => history.push("/login"), []);
-  return <></>;
-}
+};
 
 export default App;
