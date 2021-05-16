@@ -19,6 +19,7 @@ import ChangePasswordLayout from "./Components/Modules/ChangePasswordLayout";
 import TaskDescription from "./Components/Modules/TaskDescription";
 import Sidebar from "./Components/library/Sidebar";
 import AddTask from "./Components/Modules/Admin/AddTask";
+import BasketLayout from "./Components/Modules/Basket/BasketLayout";
 
 const App = () => {
   const location = useLocation();
@@ -78,6 +79,9 @@ const App = () => {
                 ) : (
                   <Redirect to={"/login"} />
                 )}
+              </Route>
+              <Route path="/basket" exact>
+                {IsLoggedIn ? <BasketLayout /> : <Redirect to={"/login"} />}
               </Route>
             </Sidebar>
           </Switch>
