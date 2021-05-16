@@ -76,7 +76,7 @@ function Sidebar({ children }) {
           {userContext?.userDetails.userState.isAdmin && (
             <>
               <NavItem Icon={VscPerson} name="All users" to="/all-users" />
-              <NavItem Icon={VscAdd} name="Create Tasks" to="/create-tasks" />
+              <NavItem Icon={VscAdd} name="Create Tasks" to="/add-task" />
             </>
           )}
           <NavItem
