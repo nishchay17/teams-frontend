@@ -18,6 +18,7 @@ import Tasks from "./Components/Modules/Tasks";
 import ChangePasswordLayout from "./Components/Modules/ChangePasswordLayout";
 import TaskDescription from "./Components/Modules/TaskDescription";
 import Sidebar from "./Components/library/Sidebar";
+import BasketLayout from "./Components/Modules/Basket/BasketLayout";
 
 function IsLoggedIn() {
   const { userDetails } = useUser();
@@ -57,6 +58,9 @@ function App() {
               </Route>
               <Route path="/tasks/:id" exact>
                 {IsLoggedIn ? <TaskDescription /> : <Redirect to={"/login"} />}
+              </Route>
+              <Route path="/basket" exact>
+                {IsLoggedIn ? <BasketLayout /> : <Redirect to={"/login"} />}
               </Route>
             </Sidebar>
           </Switch>
