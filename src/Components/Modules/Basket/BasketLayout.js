@@ -18,6 +18,8 @@ function BucketLayout() {
   } = useForm();
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
+  const [refetch, setRefetch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const onDrop = useCallback(
     (acceptedFiles) => {
       setError("");
@@ -28,14 +30,13 @@ function BucketLayout() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const { userDetails } = useUser();
-  console.log(userDetails);
   const addBasketItem = async (data) => {
     setError("");
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("name", data.name);
     formData.append("description", data.description);
-
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_URL}/bucket/upload`,
@@ -47,10 +48,10 @@ function BucketLayout() {
           },
         }
       );
-      console.log(res.data);
       if (res.data.status) {
         setFile(null);
         reset();
+        setRefetch(!refetch);
       } else {
         setError(res.data.message);
       }
@@ -58,15 +59,15 @@ function BucketLayout() {
       setFile(null);
       reset();
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <Container mt="2rem">
+    <Container mt="4rem">
       <Text fontSize="heading">Basket</Text>
-      <Text fontSize="text">
-        A place for the team to share files, links, articles.
-      </Text>
+      <Text fontSize="text">A place for the team to share files.</Text>
       <Flex
         my="1rem"
         justifyContent="center"
@@ -74,7 +75,8 @@ function BucketLayout() {
         width="100%"
         minHeight="10rem"
         sx={{
-          border: "1px solid black",
+          border: "2px dotted",
+          borderColor: "sidebarbg",
           borderRadius: "8px",
           cursor: "pointer",
         }}
@@ -103,7 +105,7 @@ function BucketLayout() {
           <FormInput
             label="Name"
             register={register}
-            name="Name"
+            name="name"
             errors={errors}
             required
           />
@@ -120,6 +122,7 @@ function BucketLayout() {
             ml={{ xs: 0, sm: "1.5rem" }}
             height="fit-content"
             type="submit"
+            disabled={isLoading}
           >
             Add to basket{" "}
           </Button>
@@ -129,6 +132,7 @@ function BucketLayout() {
             height="fit-content"
             type="button"
             bg="error"
+            disabled={isLoading}
             onClick={() => {
               reset();
               setFile(null);
@@ -139,7 +143,7 @@ function BucketLayout() {
         </Flex>
       )}
       {error && <Text color="error">Error: {error}</Text>}
-      <AllBasketItems />
+      <AllBasketItems refetch={refetch} />
     </Container>
   );
 }
