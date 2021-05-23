@@ -1,7 +1,14 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { useHistory } from "react-router-dom";
-import { VscCheck, VscFiles, VscAccount, VscKey } from "react-icons/vsc";
+import {
+  VscCheck,
+  VscFiles,
+  VscAccount,
+  VscKey,
+  VscAdd,
+  VscPerson,
+} from "react-icons/vsc";
 
 import Logo from "./Logo";
 import { useUser } from "../../Provider/UserProvider";
@@ -66,7 +73,12 @@ function Sidebar({ children }) {
           <NavItem Icon={VscAccount} name="Profile" to="/profile" />
           <NavItem Icon={VscCheck} name="Tasks" to="/tasks" />
           {/* ADD ADMIN's routes here */}
-          {userContext?.userDetails.userState.isAdmin && <></>}
+          {userContext?.userDetails.userState.isAdmin && (
+            <>
+              <NavItem Icon={VscPerson} name="All users" to="/all-users" />
+              <NavItem Icon={VscAdd} name="Create Tasks" to="/create-tasks" />
+            </>
+          )}
           <NavItem
             Icon={VscKey}
             name="Logout"
