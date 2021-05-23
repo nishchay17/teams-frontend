@@ -40,6 +40,7 @@
   font-size: 20px;
   text-align: center;
   display: inline-block;
+  margin-left: 4px;
 }
 
 .addTask {
@@ -53,4 +54,45 @@
 
 .add-task-btn {
   margin-left: 50rem;
+}
+
+.plus-icon {
+  min-width: 35px;
+  padding: 0 5px;
+  height: 35px;
+  background: #e14d59 0% 0% no-repeat padding-box;
+  border-radius: 50%;
+  opacity: 1;
+  justify-content: center;
+  color: #ffffff !important;
+}
+.plus-icon-text {
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.users-count-text {
+  display: flex;
+  align-items: center;
+}
+
+.task-status {
+  padding-right: 50px;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.user-name {
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+}
+
+.add-user-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }

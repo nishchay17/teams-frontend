@@ -101,7 +101,7 @@ const Tasks = () => {
             <Card className="assigned">
               <Card.Body style={{ width: "100%", height: "100%" }}>
                 <Card.Title>
-                  Assigned{" "}
+                  Assigned
                   <span className="task-count-circle">{assignCount}</span>
                 </Card.Title>
                 <Droppable
@@ -148,7 +148,7 @@ const Tasks = () => {
             <Card className="in-progress">
               <Card.Body>
                 <Card.Title>
-                  In Progress{" "}
+                  In Progress
                   <span className="task-count-circle">{progressCount}</span>
                 </Card.Title>
                 <Droppable
@@ -201,7 +201,7 @@ const Tasks = () => {
             <Card className="completed">
               <Card.Body>
                 <Card.Title>
-                  Complete{" "}
+                  Complete
                   <span className="task-count-circle">{completedCount}</span>
                 </Card.Title>
                 <Droppable
