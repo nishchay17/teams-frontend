@@ -79,14 +79,58 @@ const TaskDescription = () => {
             Task Description
           </Text>
         </Box>
-        <Box
-          bg="cardbg"
-          sx={{
-            borderRadius: "0.5rem",
-          }}
-          py="0.5rem"
-          px="2rem"
-        >
+
+        <Flex justifyContent="space-between">
+          <Box>
+            <Box>
+              <Text as="p" fontSize="text">
+                Task Name
+              </Text>
+              <Text as="p" fontSize="label">
+                {Description.name}
+              </Text>
+            </Box>
+            <Box mt="2.5rem">
+              <Text as="p" fontSize="text">
+                Task Details
+              </Text>
+              <Text as="p" fontSize="label">
+                {Description.description}
+              </Text>
+            </Box>
+          </Box>
+          <Box mr="10rem">
+            <Box>
+              <Text as="p" fontSize="text">
+                Task Assigned By
+              </Text>
+              <Text as="p" fontSize="label">
+                @{Description.assignedBy?.name}
+              </Text>
+            </Box>
+            <Box mt="2.5rem">
+              <Text as="p" fontSize="text">
+                Task Assigned On
+              </Text>
+              <Text as="p" fontSize="label">
+                {getDate(Description.assignedDate)}
+              </Text>
+            </Box>
+            <Box mt="2.5rem">
+              <Text as="p" fontSize="text">
+                Task Status
+              </Text>
+              <Text as="p" fontSize="label">
+                {Description.status === 1 && "Assigned"}
+                {Description.status === 2 && "In Progress"}
+                {Description.status === 3 && "Completed"}
+              </Text>
+            </Box>
+          </Box>
+        </Flex>
+
+        {/*         
+        <Box>
           <Flex justifyContent="space-between">
             <Box>
               <Text mb="2rem" as="p" fontSize="subheading">
@@ -151,7 +195,7 @@ const TaskDescription = () => {
               {Description.description}
             </Text>
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Container>
   );
