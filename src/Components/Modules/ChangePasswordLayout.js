@@ -22,8 +22,6 @@ const ChangePasswordLayout = () => {
   const { userDetails } = useUser();
 
   const fetchProfileData = async () => {
-    setIsLoading(true);
-
     try {
       const res = await axios.get(`${process.env.REACT_APP_URL}/user/me`, {
         headers: { Authorization: `Bearer ${userDetails.userState.token}` },
@@ -34,12 +32,12 @@ const ChangePasswordLayout = () => {
       } else {
         setError(res.data.message);
       }
-      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
     }
   };
-  useEffect(() => fetchProfileData(), [userDetails, fetchProfileData]);
+
+  useEffect(() => fetchProfileData(), [userDetails]);
 
   const {
     register,
