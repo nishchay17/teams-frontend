@@ -12,7 +12,7 @@ const UsersInfo = (props) => {
         style={{ marginRight: "20px", borderWidth: "3px" }}
       >
         <Link
-          to={`/user/ ${props.id}`}
+          to={`/user/${props.id}`}
           style={{ textDecoration: "none", color: "black" }}
         >
           <Card.Body>

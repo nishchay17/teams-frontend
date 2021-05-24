@@ -96,3 +96,12 @@
   align-items: center;
   cursor: pointer;
 }
+
+.user-info {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+}
+
+.btn {
+  margin-left: auto;
+}

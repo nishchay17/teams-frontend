@@ -89,7 +89,7 @@ const Tasks = () => {
 
   return (
     <Container>
-      <div className="offset-md-10 mt-5 pr-0 mt-3">
+      <div className="offset-md-10 mt-3 pr-0 mt-3">
         <Username username={task ? task.name : ""} />
       </div>
       <h3 className="mt-5 offset-md-1">
