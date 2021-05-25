@@ -11,8 +11,7 @@ import moment from "moment";
 const TaskDescription = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [userData, setUserData] = useState({});
-  const [Description, setDescription] = useState({});
+  const [description, setDescription] = useState({});
 
   const { userDetails } = useUser();
 
@@ -20,24 +19,6 @@ const TaskDescription = () => {
 
   console.log(id);
 
-  const fetchProfileData = async () => {
-    setIsLoading(true);
-
-    try {
-      const res = await axios.get(`${process.env.REACT_APP_URL}/user/me`, {
-        headers: { Authorization: `Bearer ${userDetails.userState.token}` },
-      });
-      console.log(res.data);
-      if (res.data.status) {
-        setUserData(res.data.user);
-      } else {
-        setError(res.data.message);
-      }
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
-  };
   const getTaskDescription = async () => {
     try {
       const res = await axios.get(
@@ -64,7 +45,6 @@ const TaskDescription = () => {
     return date;
   };
   useEffect(() => {
-    fetchProfileData();
     getTaskDescription();
   }, [userDetails]);
 
@@ -72,7 +52,7 @@ const TaskDescription = () => {
     <Container>
       <Box>
         <Flex mt="2.3rem" justifyContent="flex-end">
-          <Username username={userData.name} />
+          <Username />
         </Flex>
         <Box mt="2.5rem">
           <Text mb="2rem" as="p" fontSize="heading">
@@ -83,47 +63,47 @@ const TaskDescription = () => {
         <Flex>
           <Box
             bg="cardbg"
-            px="3rem"
+            px="2rem"
             py="1rem"
             sx={{
-              borderRadius: "10px",
+              borderRadius: "7px",
               minHeight: "12.5rem",
               minWidth: "50rem",
             }}
           >
-            {console.log(Description)}
-            <Text as="p" mb="0.5rem" fontSize="heading">
-              {Description.name}
+            {console.log(description)}
+            <Text as="p" mb="0.3rem" fontSize="subheading">
+              {description.name}
             </Text>
-            <Text as="p" fontSize="text">
-              {Description.description}
+            <Text as="p" fontSize="text" opacity="0.9">
+              {description.description}
             </Text>
           </Box>
           <Box mt="0.2rem" ml="3rem">
-            <Box mb="0.5rem">
-              <Text as="p" fontSize="text">
+            <Box mb="0.8rem">
+              <Text as="p" fontSize="text" opacity="0.9">
                 Task assigned by
               </Text>
-              <Text as="p" fontSize="label">
-                @{Description.assignedBy.name}
+              <Text as="p" fontSize="1.3rem">
+                @{description.assignedBy?.name}
               </Text>
             </Box>
-            <Box mb="0.5rem">
-              <Text as="p" fontSize="text">
+            <Box mb="0.8rem">
+              <Text as="p" fontSize="text" opacity="0.9">
                 Task assigned on
               </Text>
-              <Text as="p" fontSize="label">
-                {getDate(Description.assignedDate)}
+              <Text as="p" fontSize="1.3rem">
+                {getDate(description.assignedDate)}
               </Text>
             </Box>
             <Box>
-              <Text as="p" fontSize="text">
+              <Text as="p" fontSize="text" opacity="0.9">
                 Task status
               </Text>
-              <Text as="p" fontSize="label">
-                {Description.status === 0 && "Assigned"}
-                {Description.status === 1 && "In Progress"}
-                {Description.status === 2 && "Completed"}
+              <Text as="p" fontSize="1.3rem">
+                {description.status === 0 && "Assigned"}
+                {description.status === 1 && "In Progress"}
+                {description.status === 2 && "Completed"}
               </Text>
             </Box>
           </Box>
