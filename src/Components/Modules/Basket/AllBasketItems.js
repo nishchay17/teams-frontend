@@ -69,11 +69,11 @@ function AllBasketItems({ refetch }) {
                   )}
                 </Box>
                 <Flex justifyContent="space-between" alignItems="flex-end">
-                  <Box>
+                  <Box width="60%">
                     <Box mt="1rem" fontSize="1.1rem">
                       {item.name}
                     </Box>
-                    <Box fontSize="0.9rem" opacity="0.9">
+                    <Box fontSize="0.9rem" opacity="0.9" width="100%">
                       {item.description}
                     </Box>
                   </Box>

@@ -178,12 +178,7 @@ const Tasks = () => {
                                     {getDate(item.createdAt)}
                                   </span>
                                   <br />
-                                  <a
-                                    href={`/tasks/${item._id} `}
-                                    style={{ color: "black" }}
-                                  >
-                                    More...
-                                  </a>
+                                  <a href={`/tasks/${item._id} `}>More...</a>
                                 </Card.Body>
                               </Card>
                             </div>
@@ -231,12 +226,7 @@ const Tasks = () => {
                                     {getDate(item.createdAt)}
                                   </span>
                                   <br />
-                                  <a
-                                    href={`/tasks/${item._id} `}
-                                    style={{ color: "black" }}
-                                  >
-                                    More...
-                                  </a>
+                                  <a href={`/tasks/${item._id} `}>More...</a>
                                 </Card.Body>
                               </Card>
                             </div>
