@@ -80,122 +80,54 @@ const TaskDescription = () => {
           </Text>
         </Box>
 
-        <Flex justifyContent="space-between">
-          <Box>
-            <Box>
-              <Text as="p" fontSize="text">
-                Task Name
-              </Text>
-              <Text as="p" fontSize="label">
-                {Description.name}
-              </Text>
-            </Box>
-            <Box mt="2.5rem">
-              <Text as="p" fontSize="text">
-                Task Details
-              </Text>
-              <Text as="p" fontSize="label">
-                {Description.description}
-              </Text>
-            </Box>
+        <Flex>
+          <Box
+            bg="cardbg"
+            px="3rem"
+            py="1rem"
+            sx={{
+              borderRadius: "10px",
+              minHeight: "12.5rem",
+              minWidth: "50rem",
+            }}
+          >
+            {console.log(Description)}
+            <Text as="p" mb="0.5rem" fontSize="heading">
+              {Description.name}
+            </Text>
+            <Text as="p" fontSize="text">
+              {Description.description}
+            </Text>
           </Box>
-          <Box mr="10rem">
-            <Box>
+          <Box mt="0.2rem" ml="3rem">
+            <Box mb="0.5rem">
               <Text as="p" fontSize="text">
-                Task Assigned By
+                Task assigned by
               </Text>
               <Text as="p" fontSize="label">
-                @{Description.assignedBy?.name}
+                @{Description.assignedBy.name}
               </Text>
             </Box>
-            <Box mt="2.5rem">
+            <Box mb="0.5rem">
               <Text as="p" fontSize="text">
-                Task Assigned On
+                Task assigned on
               </Text>
               <Text as="p" fontSize="label">
                 {getDate(Description.assignedDate)}
               </Text>
             </Box>
-            <Box mt="2.5rem">
+            <Box>
               <Text as="p" fontSize="text">
-                Task Status
+                Task status
               </Text>
               <Text as="p" fontSize="label">
-                {Description.status === 1 && "Assigned"}
-                {Description.status === 2 && "In Progress"}
-                {Description.status === 3 && "Completed"}
+                {Description.status === 0 && "Assigned"}
+                {Description.status === 1 && "In Progress"}
+                {Description.status === 2 && "Completed"}
               </Text>
             </Box>
           </Box>
         </Flex>
-
-        {/*         
-        <Box>
-          <Flex justifyContent="space-between">
-            <Box>
-              <Text mb="2rem" as="p" fontSize="subheading">
-                Assigned Date -
-              </Text>
-              <Text mb="2rem" as="p" fontSize="text">
-                {getDate(Description.assignedDate)}
-              </Text>
-            </Box>
-          </Flex>
-          <Flex justifyContent="space-between">
-            <Box>
-              <Text mb="2rem" as="p" fontSize="subheading">
-                Assigned By -
-              </Text>
-              <Text mb="2rem" as="p" fontSize="text">
-                {Description.assignedBy?.name}
-              </Text>
-            </Box>
-            <Box>
-              <Text mb="2rem" as="p" fontSize="subheading">
-                Todays Date -
-              </Text>
-              <Text mb="2rem" as="p" fontSize="text">
-                {getDate(Description.inProgressDate)}
-              </Text>
-            </Box>
-          </Flex>
-          <Flex alignItems="center" justifyContent="space-between">
-            <Box>
-              <Text mb="2rem" as="p" fontSize="subheading">
-                Task Name -
-              </Text>
-              <Text mb="2rem" as="p" fontSize="text">
-                {Description.name}
-              </Text>
-            </Box>
-            <Box>
-              <Text textAlign="center" mb="2rem" as="p" fontSize="subheading">
-                Status -
-              </Text>
-              <Text
-                px="2rem"
-                sx={{
-                  borderRadius: "0.25rem",
-                  boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-                }}
-                py="0.5rem"
-                bg="green"
-                as="p"
-                fontSize="text"
-              >
-                {Description.status}
-              </Text>
-            </Box>
-          </Flex>
-          <Box>
-            <Text mb="2rem" as="p" fontSize="subheading">
-              Description -
-            </Text>
-            <Text mb="2rem" as="p" fontSize="text">
-              {Description.description}
-            </Text>
-          </Box>
-        </Box> */}
       </Box>
     </Container>
   );
