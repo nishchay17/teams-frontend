@@ -69,6 +69,7 @@ const TaskDescription = () => {
               borderRadius: "7px",
               minHeight: "12.5rem",
               minWidth: "50rem",
+              maxWidth: "50rem",
             }}
           >
             {console.log(description)}
