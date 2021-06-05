@@ -7,7 +7,7 @@ import axios from "axios";
 import { useUser } from "../../../Provider/UserProvider";
 import Username from "../../library/Username";
 import { Button } from "rebass";
-import ShowModal from "../../library/ShowModal";
+import DeleteUserModal from "../../library/DeleteUserModal";
 
 const SingleUserInfo = () => {
   const [allUsers, setAllUsers] = useState([]);
@@ -59,8 +59,23 @@ const SingleUserInfo = () => {
   };
 
   const showRemoveUserModal = () => {
-    console.log("ggsdhbfjn");
     setRemoveFlag(true);
+  };
+
+  const deleteUser = async () => {
+    console.log(user);
+    try {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_URL}/user/delete/${user._id}`,
+        {
+          headers: { Authorization: `Bearer ${userDetails.userState.token}` },
+        }
+      );
+      const data = res.data.user;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -162,9 +177,10 @@ const SingleUserInfo = () => {
         </Col>
       </Row>
       {removeFlag && (
-        <ShowModal
+        <DeleteUserModal
           user={user}
           text={`Are you sure you want to remove ${user.name}`}
+          deleteUser={deleteUser}
         />
       )}
     </Container>
@@ -172,6 +188,3 @@ const SingleUserInfo = () => {
 };
 
 export default SingleUserInfo;
-/**
- *
- */

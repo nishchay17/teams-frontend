@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Button } from "rebass";
-import SingleUserInfo from "./SingleUserInfo";
 
 const UsersInfo = (props) => {
   return (
@@ -11,13 +10,13 @@ const UsersInfo = (props) => {
         className="mt-4 offset-md-1"
         style={{ marginRight: "20px", borderWidth: "3px" }}
       >
-        <Link
-          to={`/user/${props.id}`}
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <Card.Body>
-            <Row className="justify-content-between align-items-center">
-              <Col md={8}>
+        <Card.Body>
+          <Row className="justify-content-between align-items-center">
+            <Col md={8}>
+              <Link
+                to={`/user/${props.id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 <Card.Title className="user-name">{props.userName}</Card.Title>
                 <div>
                   <span className="task-status">
@@ -30,13 +29,15 @@ const UsersInfo = (props) => {
                     Task(s) completed {props.completed.length}
                   </span>
                 </div>
-              </Col>
-              <Col md={2}>
-                <Button>Remove User</Button>
-              </Col>
-            </Row>
-          </Card.Body>
-        </Link>
+              </Link>
+            </Col>
+            <Col md={2}>
+              <Button onClick={() => props.showRemoveUserModal(props.userName)}>
+                Remove User
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
       </Card>
     </div>
   );

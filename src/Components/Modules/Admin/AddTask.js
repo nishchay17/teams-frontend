@@ -60,17 +60,21 @@ const AddTask = () => {
       assignedTo: assignedTo,
     };
     console.log(reqData);
-    const res = await axios.post(
-      `${process.env.REACT_APP_URL}/task/create`,
-      {
-        ...reqData,
-      },
-      {
-        headers: { Authorization: `Bearer ${userDetails.userState.token}` },
-      }
-    );
-    console.log(res);
-    reset();
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_URL}/task/create`,
+        {
+          ...reqData,
+        },
+        {
+          headers: { Authorization: `Bearer ${userDetails.userState.token}` },
+        }
+      );
+      console.log(res);
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
     /*try {
         const res = await axios.post(`${process.env.REACT_APP_URL}/task/create`, {
           headers: { Authorization: `Bearer ${userDetails.userState.token}` },

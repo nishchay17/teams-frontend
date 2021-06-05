@@ -20,7 +20,7 @@ import TaskDescription from "./Components/Modules/TaskDescription";
 import Sidebar from "./Components/library/Sidebar";
 import AddTask from "./Components/Modules/Admin/AddTask";
 import BasketLayout from "./Components/Modules/Basket/BasketLayout";
-import AddUser from "./Components/Modules/Admin/AddUser";
+import AllUsers from "./Components/Modules/Admin/AllUsers";
 import SingleUserInfo from "./Components/Modules/Admin/SingleUserInfo";
 
 const App = () => {
@@ -84,7 +84,7 @@ const App = () => {
               </Route>
               <Route path="/all-users" exact>
                 {IsLoggedIn && IsAdmin ? (
-                  <AddUser />
+                  <AllUsers />
                 ) : (
                   <Redirect to={"/login"} />
                 )}

@@ -105,3 +105,18 @@
 .btn {
   margin-left: auto;
 }
+
+.modal-text {
+  font-size: 1.5rem;
+  font-family: "Roboto", sans-serif;
+  margin-top: 8rem;
+}
+
+.Toastify__toast--success {
+  background: #00d998 !important;
+}
+
+.modal-style {
+  width: 40rem;
+  max-width: 40rem;
+}
