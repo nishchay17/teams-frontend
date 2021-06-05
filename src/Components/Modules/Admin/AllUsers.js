@@ -13,7 +13,7 @@ import { IconContext } from "react-icons/lib";
 import UsersInfo from "./UsersInfo";
 import AddUserModal from "../../library/AddUserModal";
 import ShowJoiningKeyModal from "../../library/ShowJoiningKeyModal";
-import DeleteUserModal from "../../library/DeleteUserModal";
+import ShowModal from "../../library/ShowModal";
 
 const AllUsers = () => {
   const { userDetails } = useUser();
@@ -141,7 +141,7 @@ const AllUsers = () => {
           <ShowJoiningKeyModal text={`User Joining Key is ${joiningKey}`} />
         )}
         {removeFlag && (
-          <DeleteUserModal
+          <ShowModal
             user={user}
             text={`Are you sure you want to remove ${user}`}
             deleteUser={deleteUser}

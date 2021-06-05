@@ -4,7 +4,7 @@ import { Button } from "rebass";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const DeleteUserModal = (props) => {
+const ShowModal = (props) => {
   const [show, setShow] = useState(true);
 
   const handleClose = () => {
@@ -13,8 +13,8 @@ const DeleteUserModal = (props) => {
 
   const handleDelete = () => {
     setShow(false);
-    props.deleteUser();
-    toast.success("User removed successfully!");
+    props.handleChange();
+    toast.success(props.resultText);
   };
 
   return (
@@ -47,4 +47,4 @@ const DeleteUserModal = (props) => {
   );
 };
 
-export default DeleteUserModal;
+export default ShowModal;

@@ -7,7 +7,7 @@ import axios from "axios";
 import { useUser } from "../../../Provider/UserProvider";
 import Username from "../../library/Username";
 import { Button } from "rebass";
-import DeleteUserModal from "../../library/DeleteUserModal";
+import ShowModal from "../../library/ShowModal";
 
 const SingleUserInfo = () => {
   const [allUsers, setAllUsers] = useState([]);
@@ -16,6 +16,7 @@ const SingleUserInfo = () => {
   const [progressCount, setProgressCount] = useState(0);
   const [completedCount, setCompletedCount] = useState(0);
   const [removeFlag, setRemoveFlag] = useState(false);
+  const [adminFlag, setAdminFlag] = useState(false);
 
   const history = useHistory();
   const params = useParams();
@@ -60,6 +61,7 @@ const SingleUserInfo = () => {
 
   const showRemoveUserModal = () => {
     setRemoveFlag(true);
+    setAdminFlag(false);
   };
 
   const deleteUser = async () => {
@@ -78,12 +80,52 @@ const SingleUserInfo = () => {
     }
   };
 
+  const makeAdmin = async (data) => {
+    let reqData = {
+      employeeId: user.employeeId,
+    };
+    console.log(reqData);
+    try {
+      const res = await axios.put(
+        `${process.env.REACT_APP_URL}/user/make-admin`,
+        {
+          ...reqData,
+        },
+        {
+          headers: { Authorization: `Bearer ${userDetails.userState.token}` },
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const showMakeAdminModal = () => {
+    setAdminFlag(true);
+    setRemoveFlag(false);
+  };
+
   return (
     <Container>
       <div className="offset-md-10 mt-3 pr-0 mt-3">
         <Username username={user ? user.name : ""} />
       </div>
-      <h3 className="mt-5 offset-md-1">User Information</h3>
+      <div style={{ display: "flex" }}>
+        <h3 className="mt-5 offset-md-1" style={{ marginRight: "2rem" }}>
+          User Information
+        </h3>
+        {!user.isAdmin && (
+          <Button
+            className="mt-5 py-1"
+            style={{ width: "10rem", height: "2.5rem" }}
+            onClick={showMakeAdminModal}
+          >
+            Make Admin
+          </Button>
+        )}
+      </div>
+
       <Row className="offset-md-1 align-items-center user-info">
         <Col sm={2}>
           <div>Name</div>
@@ -98,7 +140,12 @@ const SingleUserInfo = () => {
           <div>{user.employeeId}</div>
         </Col>
         <Col className="btn">
-          <Button onClick={showRemoveUserModal}>Remove User</Button>
+          <Button
+            onClick={showRemoveUserModal}
+            style={{ backgroundColor: "#ee5a5a" }}
+          >
+            Remove User
+          </Button>
         </Col>
       </Row>
 
@@ -177,10 +224,19 @@ const SingleUserInfo = () => {
         </Col>
       </Row>
       {removeFlag && (
-        <DeleteUserModal
+        <ShowModal
           user={user}
           text={`Are you sure you want to remove ${user.name}`}
-          deleteUser={deleteUser}
+          resultText={"User removed successfully!"}
+          handleChange={deleteUser}
+        />
+      )}
+      {adminFlag && (
+        <ShowModal
+          user={user}
+          text={`Are you sure you want to make ${user.name} Admin`}
+          resultText={`Updated role of ${user.name} as Admin`}
+          handleChange={makeAdmin}
         />
       )}
     </Container>
