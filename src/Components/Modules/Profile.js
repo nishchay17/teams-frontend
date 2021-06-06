@@ -42,12 +42,7 @@ const Profile = () => {
     <Container>
       <Box>
         {isLoading ? (
-          <Flex
-            alignItems="center"
-            justifyContent="center"
-            width="100%"
-            height="100vh"
-          >
+          <Flex width="100%" height="100vh">
             <Loader />
           </Flex>
         ) : (
