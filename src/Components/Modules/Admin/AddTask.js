@@ -60,21 +60,17 @@ const AddTask = () => {
       assignedTo: assignedTo,
     };
     console.log(reqData);
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_URL}/task/create`,
-        {
-          ...reqData,
-        },
-        {
-          headers: { Authorization: `Bearer ${userDetails.userState.token}` },
-        }
-      );
-      console.log(res);
-      reset();
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.post(
+      `${process.env.REACT_APP_URL}/task/create`,
+      {
+        ...reqData,
+      },
+      {
+        headers: { Authorization: `Bearer ${userDetails.userState.token}` },
+      }
+    );
+    console.log(res);
+    reset();
     /*try {
         const res = await axios.post(`${process.env.REACT_APP_URL}/task/create`, {
           headers: { Authorization: `Bearer ${userDetails.userState.token}` },
@@ -91,9 +87,7 @@ const AddTask = () => {
     <div>
       <Container>
         <Sidebar />
-        <div className="offset-md-11 pr-0 mt-3">
-          <Username />
-        </div>
+        <div className="offset-md-11 pr-0 mt-3"></div>
         <h3 className="mt-5 offset-md-1">Add Task</h3>
         <Row className="mt-5 offset-md-1">
           <Col md={5}>
@@ -122,7 +116,7 @@ const AddTask = () => {
               </Form.Group>
             </Form>
           </Col>
-          <Col md={5} className="mt-5 ">
+          <Col md={5} className="mt-5">
             <FormInput
               label="Description"
               register={register}

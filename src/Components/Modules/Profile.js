@@ -6,7 +6,6 @@ import Avatar from "../library/Avatar";
 import Container from "../library/Container";
 import { useHistory } from "react-router";
 
-import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
 import Loader from "../library/Loader";
 
@@ -42,19 +41,12 @@ const Profile = () => {
     <Container>
       <Box>
         {isLoading ? (
-          <Flex
-            alignItems="center"
-            justifyContent="center"
-            width="100%"
-            height="100vh"
-          >
+          <Flex width="100%" height="100vh">
             <Loader />
           </Flex>
         ) : (
           <>
-            <Flex mt="2.3rem" justifyContent="flex-end">
-              <Username username={userData.name} />
-            </Flex>
+            <Flex mt="2.3rem" justifyContent="flex-end"></Flex>
             <Flex alignItems="flex-end" justifyContent="space-between">
               <Avatar username={userData.name} />
               <Box>

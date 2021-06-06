@@ -22,6 +22,7 @@ import AddTask from "./Components/Modules/Admin/AddTask";
 import BasketLayout from "./Components/Modules/Basket/BasketLayout";
 import AllUsers from "./Components/Modules/Admin/AllUsers";
 import SingleUserInfo from "./Components/Modules/Admin/SingleUserInfo";
+import Username from "./Components/library/Username";
 
 const App = () => {
   const location = useLocation();
@@ -59,6 +60,7 @@ const App = () => {
               <SignupLayout />
             </Route>
             <Sidebar>
+              <Username />
               <Route path="/profile" exact>
                 {IsLoggedIn ? <Profile /> : <Redirect to={"/login"} />}
               </Route>

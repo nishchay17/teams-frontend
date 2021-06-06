@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Sidebar from "../../library/Sidebar";
-import Username from "../../library/Username";
 import Select from "react-select";
 import axios from "axios";
 import { useUser } from "../../../Provider/UserProvider";
@@ -26,7 +25,7 @@ const AllUsers = () => {
 
   useEffect(() => {
     getEmployees();
-  }, []);
+  }, [userDetails]);
 
   const getEmployees = async () => {
     try {
@@ -98,9 +97,7 @@ const AllUsers = () => {
     <div>
       <Container>
         <Sidebar />
-        <div className="offset-md-11 pr-0 mt-3">
-          <Username />
-        </div>
+        <div className="offset-md-11 pr-0 mt-3"></div>
         <div className="mt-5">
           <h3 className="offset-md-1 users-count-text">
             All Users
@@ -133,6 +130,7 @@ const AllUsers = () => {
         })}
         {addUserFlag && (
           <AddUserModal
+            setAddUserFlag={setAddUserFlag}
             text={"Enter email id of the user you want to add"}
             addUser={addNewUser}
           />
@@ -145,6 +143,7 @@ const AllUsers = () => {
             user={user}
             text={`Are you sure you want to remove ${user}`}
             deleteUser={deleteUser}
+            setRemoveFlag={setRemoveFlag}
           />
         )}
       </Container>

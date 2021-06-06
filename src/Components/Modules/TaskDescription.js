@@ -5,7 +5,6 @@ import { Box, Flex, Text } from "rebass";
 import { useUser } from "../../Provider/UserProvider";
 
 import Container from "../library/Container";
-import Username from "../library/Username";
 import moment from "moment";
 
 const TaskDescription = () => {
@@ -51,9 +50,7 @@ const TaskDescription = () => {
   return (
     <Container>
       <Box>
-        <Flex mt="2.3rem" justifyContent="flex-end">
-          <Username />
-        </Flex>
+        <Flex mt="2.3rem" justifyContent="flex-end"></Flex>
         <Box mt="2.5rem">
           <Text mb="2rem" as="p" fontSize="heading">
             Task Description
@@ -69,7 +66,6 @@ const TaskDescription = () => {
               borderRadius: "7px",
               minHeight: "12.5rem",
               minWidth: "50rem",
-              maxWidth: "50rem",
             }}
           >
             {console.log(description)}

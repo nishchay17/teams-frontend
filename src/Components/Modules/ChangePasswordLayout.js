@@ -6,12 +6,10 @@ import { useHistory } from "react-router";
 
 import FormInput from "../Form/FormInput";
 import Container from "../library/Container";
-import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
 
 const ChangePasswordLayout = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [userData, setUserData] = useState({});
   const [error, setError] = useState("");
   const [responseMessage, setResponseMessage] = useState({
     success: "",
@@ -20,24 +18,6 @@ const ChangePasswordLayout = () => {
 
   const history = useHistory();
   const { userDetails } = useUser();
-
-  const fetchProfileData = async () => {
-    try {
-      const res = await axios.get(`${process.env.REACT_APP_URL}/user/me`, {
-        headers: { Authorization: `Bearer ${userDetails.userState.token}` },
-      });
-      console.log(res.data);
-      if (res.data.status) {
-        setUserData(res.data.user);
-      } else {
-        setError(res.data.message);
-      }
-    } catch (error) {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => fetchProfileData(), [userDetails]);
 
   const {
     register,
@@ -81,10 +61,6 @@ const ChangePasswordLayout = () => {
   return (
     <Container>
       <Box>
-        <Flex mt="2.3rem" justifyContent="flex-end">
-          <Username username={userData.name} />
-        </Flex>
-
         <Box mt="2.5rem">
           <Text mb="2rem" as="p" fontSize="heading">
             Change Password
