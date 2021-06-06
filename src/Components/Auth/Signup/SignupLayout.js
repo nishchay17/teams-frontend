@@ -120,6 +120,7 @@ const SignupLayout = () => {
                     label="Password"
                     register={register}
                     name="password"
+                    type="password"
                     errors={errors}
                     required
                   />
