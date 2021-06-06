@@ -108,9 +108,7 @@ const SingleUserInfo = () => {
 
   return (
     <Container>
-      <div className="offset-md-10 mt-3 pr-0 mt-3">
-        <Username username={user ? user.name : ""} />
-      </div>
+      <div className="offset-md-10 mt-3 pr-0 mt-3"></div>
       <div style={{ display: "flex" }}>
         <h3 className="mt-5 offset-md-1" style={{ marginRight: "2rem" }}>
           User Information

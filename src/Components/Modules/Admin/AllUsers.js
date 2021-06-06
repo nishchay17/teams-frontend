@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Sidebar from "../../library/Sidebar";
-import Username from "../../library/Username";
 import Select from "react-select";
 import axios from "axios";
 import { useUser } from "../../../Provider/UserProvider";
@@ -28,7 +27,7 @@ const AllUsers = () => {
 
   useEffect(() => {
     getEmployees();
-  }, []);
+  }, [userDetails]);
 
   const getEmployees = async () => {
     setIsLoading(true);

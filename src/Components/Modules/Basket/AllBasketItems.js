@@ -47,11 +47,12 @@ function AllBasketItems({ refetch }) {
                 }}
               >
                 <Box width="100%" height="10rem" sx={{ borderRadius: "9px" }}>
-                  {item.file.match(/\.(jpeg|jpg|gif|png)$/) !== null ? (
+                  {item.fileData.contentType.match(/\/(jpeg|jpg|gif|png)$/) !==
+                  null ? (
                     <Image
                       width="100%"
                       height="100%"
-                      src={item.file}
+                      src={`${process.env.REACT_APP_URL}/bucket/file/${item._id}`}
                       sx={{ objectFit: "contain", objectPosition: "left" }}
                     />
                   ) : (
@@ -82,7 +83,7 @@ function AllBasketItems({ refetch }) {
                     fontSize="0.9rem"
                     rel="noopener noreferrer"
                     target="_blank"
-                    href={item.file}
+                    href={`${process.env.REACT_APP_URL}/bucket/file/${item._id}`}
                   >
                     Download
                   </Button>

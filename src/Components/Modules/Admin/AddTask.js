@@ -89,9 +89,7 @@ const AddTask = () => {
     <div>
       <Container>
         <Sidebar />
-        <div className="offset-md-11 pr-0 mt-3">
-          <Username />
-        </div>
+        <div className="offset-md-11 pr-0 mt-3"></div>
         <h3 className="mt-5 offset-md-1">Add Task</h3>
         <Row className="mt-5 offset-md-1">
           <Col md={5}>
