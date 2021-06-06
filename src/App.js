@@ -20,6 +20,8 @@ import TaskDescription from "./Components/Modules/TaskDescription";
 import Sidebar from "./Components/library/Sidebar";
 import AddTask from "./Components/Modules/Admin/AddTask";
 import BasketLayout from "./Components/Modules/Basket/BasketLayout";
+import AllUsers from "./Components/Modules/Admin/AllUsers";
+import SingleUserInfo from "./Components/Modules/Admin/SingleUserInfo";
 
 const App = () => {
   const location = useLocation();
@@ -80,6 +82,21 @@ const App = () => {
                   <Redirect to={"/login"} />
                 )}
               </Route>
+              <Route path="/all-users" exact>
+                {IsLoggedIn && IsAdmin ? (
+                  <AllUsers />
+                ) : (
+                  <Redirect to={"/login"} />
+                )}
+              </Route>
+              <Route path="/user/:id" exact>
+                {IsLoggedIn && IsAdmin ? (
+                  <SingleUserInfo />
+                ) : (
+                  <Redirect to={"/login"} />
+                )}
+              </Route>
+
               <Route path="/basket" exact>
                 {IsLoggedIn ? <BasketLayout /> : <Redirect to={"/login"} />}
               </Route>

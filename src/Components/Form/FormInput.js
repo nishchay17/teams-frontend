@@ -13,6 +13,7 @@ function FormInput({
   errors,
   inputProps,
   customError,
+  placeholder,
   ...props
 }) {
   return (
@@ -24,7 +25,7 @@ function FormInput({
         name={name}
         required={required}
         error={required && errors && errors[name]}
-        placeholder={"Enter " + label}
+        placeholder={placeholder}
         {...inputProps}
       />
       {required && errors && errors[name] && (

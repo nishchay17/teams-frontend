@@ -46,7 +46,7 @@ export const theme = {
       color: "black",
       fontSize: "1.3rem",
       bg: "primary",
-      px: "1.5rem",
+      px: "1rem",
       py: "0.7rem",
       cursor: "pointer",
       ":focus": {
