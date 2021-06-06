@@ -19,7 +19,7 @@ function Loader() {
       justifyContent="center"
       alignItems="center"
     >
-      <Lottie options={defaultOptions} height={"10rem"} width={"10rem"} />;
+      <Lottie options={defaultOptions} height={"10rem"} width={"10rem"} />
     </Flex>
   );
 }

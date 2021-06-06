@@ -6,7 +6,6 @@ import moment from "moment";
 import axios from "axios";
 
 import "./module.css";
-import Username from "../library/Username";
 import { useUser } from "../../Provider/UserProvider";
 
 const Tasks = () => {
@@ -89,9 +88,6 @@ const Tasks = () => {
 
   return (
     <Container>
-      <div className="offset-md-10 mt-3 pr-0 mt-3">
-        <Username username={task ? task.name : ""} />
-      </div>
       <h3 className="mt-5 offset-md-1">
         <u style={{ textDecorationColor: "#FDC960" }}>Your Tasks</u>
       </h3>

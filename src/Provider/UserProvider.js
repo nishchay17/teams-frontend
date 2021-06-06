@@ -33,7 +33,6 @@ function UserProvider(props) {
   const loadFromStorage = () => {
     const userStateString = localStorage.getItem("user_state");
     if (userStateString) {
-      console.log(JSON.parse(userStateString));
       dispatch({
         type: "USER_LOGIN",
         user: { ...JSON.parse(userStateString).userState },
