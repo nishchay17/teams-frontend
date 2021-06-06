@@ -26,7 +26,7 @@ const AllUsers = () => {
 
   useEffect(() => {
     getEmployees();
-  }, []);
+  }, [userDetails]);
 
   const getEmployees = async () => {
     try {
@@ -133,6 +133,7 @@ const AllUsers = () => {
         })}
         {addUserFlag && (
           <AddUserModal
+            setAddUserFlag={setAddUserFlag}
             text={"Enter email id of the user you want to add"}
             addUser={addNewUser}
           />
@@ -145,6 +146,7 @@ const AllUsers = () => {
             user={user}
             text={`Are you sure you want to remove ${user}`}
             deleteUser={deleteUser}
+            setRemoveFlag={setRemoveFlag}
           />
         )}
       </Container>

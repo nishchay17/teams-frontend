@@ -118,7 +118,7 @@ const AddTask = () => {
               </Form.Group>
             </Form>
           </Col>
-          <Col md={5} className="mt-5 ">
+          <Col md={5} className="mt-5">
             <FormInput
               label="Description"
               register={register}
