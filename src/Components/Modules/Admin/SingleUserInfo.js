@@ -226,7 +226,7 @@ const SingleUserInfo = () => {
       {removeFlag && (
         <ShowModal
           user={user}
-          text={`Are you sure you want to remove ${user.name}`}
+          text={`Are you sure you want to remove ${user.name}?`}
           resultText={"User removed successfully!"}
           handleChange={deleteUser}
         />
@@ -234,7 +234,7 @@ const SingleUserInfo = () => {
       {adminFlag && (
         <ShowModal
           user={user}
-          text={`Are you sure you want to make ${user.name} Admin`}
+          text={`Are you sure you want to make ${user.name} Admin?`}
           resultText={`Updated role of ${user.name} as Admin`}
           handleChange={makeAdmin}
         />

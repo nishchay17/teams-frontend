@@ -5,6 +5,7 @@ function Input({ type, name, register, required, placeholder, error }) {
   return (
     <Inputr
       width="100%"
+      height="100%"
       py="0.8rem"
       fontSize="text"
       sx={{

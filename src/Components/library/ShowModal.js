@@ -33,11 +33,15 @@ const ShowModal = (props) => {
           <Button
             variant="primary"
             onClick={handleDelete}
-            style={{ marginRight: "1rem" }}
+            style={{ width: "5rem", height: "3rem", marginRight: "1rem" }}
           >
             Yes
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            variant="primary"
+            onClick={handleClose}
+            style={{ width: "5rem", height: "3rem" }}
+          >
             No
           </Button>
         </Modal.Footer>

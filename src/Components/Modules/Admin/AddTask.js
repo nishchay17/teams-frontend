@@ -7,12 +7,18 @@ import axios from "axios";
 import { useUser } from "../../../Provider/UserProvider";
 import FormInput from "../../Form/FormInput";
 import { useForm } from "react-hook-form";
-import { Label } from "@rebass/forms";
+import { Label, Textarea } from "@rebass/forms";
 import { Button } from "rebass";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddTask = () => {
   const { userDetails } = useUser();
   const [assignedTo, setAssignedTo] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState({
+    label: "Select employee",
+    value: "",
+  });
   const {
     register,
     handleSubmit,
@@ -51,6 +57,7 @@ const AddTask = () => {
 
   const handleChange = (e) => {
     setAssignedTo(e.value);
+    setSelectedEmployee(e);
   };
 
   const submitHandler = async (data) => {
@@ -72,19 +79,10 @@ const AddTask = () => {
       );
       console.log(res);
       reset();
+      toast.success("Task added sucessfully!");
     } catch (error) {
       console.log(error);
     }
-    /*try {
-        const res = await axios.post(`${process.env.REACT_APP_URL}/task/create`, {
-          headers: { Authorization: `Bearer ${userDetails.userState.token}` },
-        });
-        const data = res.data.user;
-        console.log(data);
-        setTask(data);
-      } catch (error) {
-        console.log(error);
-      }*/
   };
 
   return (
@@ -99,6 +97,7 @@ const AddTask = () => {
           <Col md={5}>
             <FormInput
               label="Title"
+              placeholder="Enter title"
               register={register}
               name="title"
               errors={errors}
@@ -109,34 +108,51 @@ const AddTask = () => {
           <Col md={5}>
             <Form>
               <Form.Group>
-                <Form.Label className="addTask">Assigned To</Form.Label>
+                <Form.Label className="mb-2 addTask">Assigned To</Form.Label>
                 <Select
                   options={employees}
                   placeholder={"Select employee"}
                   onChange={handleChange}
+                  value={selectedEmployee}
                   name={"assignedTo"}
+                  required
                   isSearchable={true}
                   isDisabled={isEmpty(employees)}
-                  className={"select-employee"}
+                  classNamePrefix="select-employee"
+                  className="select-employee"
                 />
               </Form.Group>
             </Form>
           </Col>
-          <Col md={5} className="mt-5 ">
-            <FormInput
+          <Col md={12} className="mt-2 ">
+            <Textarea
               label="Description"
               register={register}
               name="description"
               placeholder="Type here"
+              style={{ width: "53rem" }}
+              height="9rem"
               errors={errors}
-              required
+              required={true}
               type="text"
             />
           </Col>
+          <Col md={12} className="mt-5 ">
+            <FormInput
+              label="Add media"
+              register={register}
+              name="media"
+              placeholder=""
+              style={{ width: "53rem" }}
+              height="7rem"
+              errors={errors}
+            />
+          </Col>
         </Row>
-        <Button marginLeft="49rem" onClick={handleSubmit(submitHandler)}>
-          Add Task
+        <Button marginLeft="53rem" onClick={handleSubmit(submitHandler)}>
+          Add
         </Button>
+        <ToastContainer />
       </Container>
     </div>
   );
