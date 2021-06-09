@@ -56,8 +56,8 @@
   height: 3rem;
 }
 
-.description__value-container {
-  height: 30rem;
+.add-description {
+  border-radius: 8px;
 }
 
 .add-task-btn {
@@ -127,4 +127,13 @@
 .modal-style {
   width: 40rem;
   max-width: 40rem;
+}
+
+.add-media {
+  border-radius: 8px;
+  cursor: pointer;
+  width: 112vh;
+  height: 7rem;
+  text-align: center;
+  padding-top: 2.5rem;
 }

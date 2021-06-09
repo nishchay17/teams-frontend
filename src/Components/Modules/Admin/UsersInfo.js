@@ -7,7 +7,7 @@ const UsersInfo = (props) => {
   return (
     <div>
       <Card
-        className="mt-4 offset-md-1"
+        className="mt-4"
         style={{ marginRight: "20px", borderWidth: "3px" }}
       >
         <Card.Body>

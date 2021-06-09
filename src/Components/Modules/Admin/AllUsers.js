@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Sidebar from "../../library/Sidebar";
 import Select from "react-select";
 import axios from "axios";
 import { useUser } from "../../../Provider/UserProvider";
 import FormInput from "../../Form/FormInput";
 import { useForm } from "react-hook-form";
-import { Label } from "@rebass/forms";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
 import UsersInfo from "./UsersInfo";
@@ -14,6 +12,7 @@ import AddUserModal from "../../library/AddUserModal";
 import ShowJoiningKeyModal from "../../library/ShowJoiningKeyModal";
 import ShowModal from "../../library/ShowModal";
 import Loader from "../../library/Loader";
+import Container from "../../library/Container";
 
 const AllUsers = () => {
   const { userDetails } = useUser();
@@ -105,11 +104,9 @@ const AllUsers = () => {
         <Loader />
       ) : (
         <div>
-          <div className="offset-md-11 pr-0 mt-3">
-            <Username />
-          </div>
+          <div className="offset-md-11 pr-0 mt-3"></div>
           <div className="mt-5">
-            <h3 className="offset-md-1 users-count-text">
+            <h3 className="users-count-text">
               All Users
               <span className="task-count-circle">{allUsers.length}</span>
             </h3>
