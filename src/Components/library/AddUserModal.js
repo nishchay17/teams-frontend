@@ -15,7 +15,7 @@ const AddUserModal = (props) => {
 
   const handleClose = () => {
     setShow(false);
-    props.setAddUserFlag(false);
+    props.hideAddUserModal();
   };
 
   const submitHandler = (data) => {

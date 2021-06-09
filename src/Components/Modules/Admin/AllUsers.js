@@ -50,6 +50,18 @@ const AllUsers = () => {
     setRemoveFlag(false);
   };
 
+  const hideAddUserModal = () => {
+    setAddUserFlag(false);
+    setShowJoiningKeyFlag(false);
+    setRemoveFlag(false);
+  };
+
+  const hideModal = () => {
+    setAddUserFlag(false);
+    setShowJoiningKeyFlag(false);
+    setRemoveFlag(false);
+  };
+
   const showRemoveUserModal = (data) => {
     setUser(data);
     setAddUserFlag(false);
@@ -139,6 +151,7 @@ const AllUsers = () => {
             <AddUserModal
               text={"Enter email id of the user you want to add"}
               addUser={addNewUser}
+              hideAddUserModal={hideAddUserModal}
             />
           )}
           {showJoiningKeyFlag && (
@@ -149,6 +162,7 @@ const AllUsers = () => {
               user={user}
               text={`Are you sure you want to remove ${user}?`}
               deleteUser={deleteUser}
+              hideModal={hideModal}
             />
           )}
         </div>

@@ -9,7 +9,7 @@ const ShowModal = (props) => {
 
   const handleClose = () => {
     setShow(false);
-    props.setRemoveFlag(false);
+    props.hideModal();
   };
 
   const handleDelete = () => {

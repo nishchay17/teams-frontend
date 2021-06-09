@@ -64,6 +64,11 @@ const SingleUserInfo = () => {
     setAdminFlag(false);
   };
 
+  const hideRemoveUserModal = () => {
+    setRemoveFlag(false);
+    setAdminFlag(false);
+  };
+
   const deleteUser = async () => {
     console.log(user);
     try {
@@ -103,6 +108,11 @@ const SingleUserInfo = () => {
 
   const showMakeAdminModal = () => {
     setAdminFlag(true);
+    setRemoveFlag(false);
+  };
+
+  const hideMakeAdminModal = () => {
+    setAdminFlag(false);
     setRemoveFlag(false);
   };
 
@@ -227,6 +237,7 @@ const SingleUserInfo = () => {
           text={`Are you sure you want to remove ${user.name}?`}
           resultText={"User removed successfully!"}
           handleChange={deleteUser}
+          hideModal={hideRemoveUserModal}
         />
       )}
       {adminFlag && (
@@ -235,6 +246,7 @@ const SingleUserInfo = () => {
           text={`Are you sure you want to make ${user.name} Admin?`}
           resultText={`Updated role of ${user.name} as Admin`}
           handleChange={makeAdmin}
+          hideModal={hideMakeAdminModal}
         />
       )}
     </Container>
