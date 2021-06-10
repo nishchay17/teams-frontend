@@ -3,12 +3,12 @@ import { Box, Button, Flex, Link, Text } from "rebass";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 import { useUser } from "../../../Provider/UserProvider";
 import Logo from "../../library/Logo";
 import FormInput from "../../Form/FormInput";
 import AuthWrapper from "../AuthWrapper";
-import { motion } from "framer-motion";
 
 const container = {
   hidden: { opacity: 0 },
