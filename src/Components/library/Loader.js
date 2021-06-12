@@ -14,12 +14,20 @@ function Loader() {
   };
   return (
     <Flex
+      sx={{
+        userSelect: "none",
+      }}
       width="100%"
       height="100%"
       justifyContent="center"
       alignItems="center"
     >
-      <Lottie options={defaultOptions} height={"10rem"} width={"10rem"} />
+      <Lottie
+        options={defaultOptions}
+        isClickToPauseDisabled={true}
+        height={"10rem"}
+        width={"10rem"}
+      />
     </Flex>
   );
 }
