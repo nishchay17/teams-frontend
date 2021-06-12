@@ -69,7 +69,7 @@ function Sidebar({ children }) {
       >
         <Logo color="white" noAnimation />
         <Flex flexDirection="column" height="100%" py="5rem">
-          <NavItem Icon={VscFiles} name="Basket" to="/basket" />
+          <NavItem Icon={VscFiles} name="Bucket" to="/bucket" />
           <NavItem Icon={VscAccount} name="Profile" to="/profile" />
           <NavItem Icon={VscCheck} name="Tasks" to="/tasks" />
           {/* ADD ADMIN's routes here */}

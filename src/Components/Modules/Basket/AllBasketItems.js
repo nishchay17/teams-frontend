@@ -25,7 +25,7 @@ function AllBasketItems({ refetch }) {
   return (
     <Box my="1rem">
       <Text fontSize="subheading" mb="1rem">
-        All Basket Items
+        All Bucket Items
       </Text>
       {isLoading ? (
         <Box>
