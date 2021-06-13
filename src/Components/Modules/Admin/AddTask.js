@@ -19,6 +19,7 @@ const AddTask = () => {
   const [assignedTo, setAssignedTo] = useState("");
   const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingUserList, setIsFetchingUserList] = useState(false);
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [refetch, setRefetch] = useState(false);
@@ -26,6 +27,7 @@ const AddTask = () => {
     label: "Select employee",
     value: "",
   });
+  const [employees, setEmployees] = useState([]);
   const {
     register,
     handleSubmit,
@@ -41,29 +43,46 @@ const AddTask = () => {
     [setFile]
   );
 
+  function resetAll() {
+    reset();
+    setSelectedEmployee({
+      label: "Select employee",
+      value: "",
+    });
+    setFile(null);
+    setDescription("");
+    setRefetch((re) => !re);
+  }
+  console.log(description);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   useEffect(() => employeeList(), [userDetails]);
 
-  let employees = [];
-
   const employeeList = async () => {
     console.log(userDetails);
+    setIsFetchingUserList(true);
     try {
       const res = await axios.get(`${process.env.REACT_APP_URL}/user/all`, {
         headers: { Authorization: `Bearer ${userDetails.userState.token}` },
       });
       const data = res.data.users;
       console.log(data);
-      data.map((employee) => {
-        employees.push({
-          label: employee.name,
-          value: employee._id,
+      setEmployees(() => {
+        let temp = [];
+        data.map((employee) => {
+          temp.push({
+            label: employee.name,
+            value: employee._id,
+          });
         });
+        return temp;
       });
+      setIsFetchingUserList(false);
       console.log(employees);
     } catch (error) {
       console.log(error);
+      setIsFetchingUserList(false);
     }
   };
 
@@ -80,7 +99,7 @@ const AddTask = () => {
   const handleDesChange = (e) => {
     console.log(e.target.value);
     setDescription(e.target.value);
-  }
+  };
 
   const submitHandler = async (data) => {
     console.log(data);
@@ -103,18 +122,17 @@ const AddTask = () => {
           },
         }
       );
+      console.log(res);
       if (res.data.status) {
-        setFile(null);
-        reset();
-        setRefetch(!refetch);
+        resetAll();
         toast.success("Task added successfully!");
       } else {
+        resetAll();
         setError(res.data.message);
       }
       setIsLoading(false);
     } catch (error) {
-      setFile(null);
-      reset();
+      resetAll();
       setIsLoading(false);
       console.log(error);
     }
@@ -128,13 +146,18 @@ const AddTask = () => {
         <Button
           className="mt-4 py-1"
           style={{ width: "8rem", height: "2.5rem" }}
-          onClick={handleSubmit(submitHandler)}
+          type="submit"
+          form="add"
         >
           Add
         </Button>
       </div>
 
-      <Row className="mt-5">
+      <form
+        onSubmit={handleSubmit(submitHandler)}
+        id="add"
+        className="row mt-5"
+      >
         <Col md={5}>
           <FormInput
             label="Title"
@@ -147,9 +170,11 @@ const AddTask = () => {
           />
         </Col>
         <Col md={5}>
-          <Form>
-            <Form.Group>
-              <Form.Label className="mb-2 addTask">Assigned To</Form.Label>
+          <Form.Group>
+            <Form.Label className="mb-2 addTask">Assigned To</Form.Label>
+            {isFetchingUserList ? (
+              <p>Loading User list</p>
+            ) : (
               <Select
                 options={employees}
                 placeholder={"Select employee"}
@@ -162,8 +187,8 @@ const AddTask = () => {
                 classNamePrefix="select-employee"
                 className="select-employee"
               />
-            </Form.Group>
-          </Form>
+            )}
+          </Form.Group>
         </Col>
         <Col md={12} className="mt-2 ">
           <Label className="addTask">Description</Label>
@@ -196,7 +221,7 @@ const AddTask = () => {
             )}
           </div>
         </Col>
-      </Row>
+      </form>
       <ToastContainer />
     </Container>
   );
