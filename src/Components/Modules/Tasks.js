@@ -1,14 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import moment from "moment";
 import axios from "axios";
+import { Flex } from "rebass";
+import { motion } from "framer-motion";
 
 import "./module.css";
 import { useUser } from "../../Provider/UserProvider";
+import Loader from "../library/Loader";
+import Container from "../library/Container";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: -200 },
+  show: { opacity: 1, y: 0 },
+};
 
 const Tasks = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [task, setTask] = useState(null);
   const [assignCount, setAssignCount] = useState(0);
   const [progressCount, setProgressCount] = useState(0);
@@ -27,11 +47,12 @@ const Tasks = () => {
   const getTasks = async () => {
     if (!userDetails.userState.token) history.push("/");
     try {
+      setIsLoading(true);
       const res = await axios.get(`${process.env.REACT_APP_URL}/user/me`, {
         headers: { Authorization: `Bearer ${userDetails.userState.token}` },
       });
       const data = res.data.user;
-      console.log(data);
+      setIsLoading(false);
       setTask(data);
     } catch (error) {
       console.log(error);
@@ -88,156 +109,165 @@ const Tasks = () => {
 
   return (
     <Container>
-      <h3 className="mt-5 offset-md-1">
-        <u style={{ textDecorationColor: "#FDC960" }}>Your Tasks</u>
-      </h3>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Row className="mt-4 offset-md-1">
-          <Col sm={4}>
-            <Card className="assigned">
-              <Card.Body style={{ width: "100%", height: "100%" }}>
-                <Card.Title>
-                  Assigned
-                  <span className="task-count-circle">{assignCount}</span>
-                </Card.Title>
-                <Droppable
-                  droppableId="taskAssigned"
-                  style={{ width: "100%", height: "10rem" }}
-                >
-                  {(provided, snapshot) => (
-                    <div ref={provided.innerRef}>
-                      {task?.taskAssigned.map((item, index) => (
-                        <Draggable
-                          key={item._id}
-                          draggableId={item._id}
-                          index={index}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <Card className="bg-primary mt-3">
-                                <Card.Body>
-                                  <Card.Title>{item.name}</Card.Title>
-                                  <span className="assignInfo">
-                                    Assigned by {item.assignedBy.name} on{" "}
-                                    {getDate(item.createdAt)}
-                                  </span>
-                                  <br />
-                                  <a href={`/tasks/${item._id} `}>More...</a>
-                                </Card.Body>
-                              </Card>
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col sm={4}>
-            <Card className="in-progress">
-              <Card.Body>
-                <Card.Title>
-                  In Progress
-                  <span className="task-count-circle">{progressCount}</span>
-                </Card.Title>
-                <Droppable
-                  droppableId="taskInProgress"
-                  width="100%"
-                  height="100%"
-                >
-                  {(provided, snapshot) => (
-                    <div ref={provided.innerRef}>
-                      {task?.taskInProgress.map((item, index) => (
-                        <Draggable
-                          key={item._id}
-                          draggableId={item._id}
-                          index={index + task?.taskAssigned.length}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <Card className="bg-primary mt-3">
-                                <Card.Body>
-                                  <Card.Title>{item.name}</Card.Title>
-                                  <span className="assignInfo">
-                                    Assigned by {item.assignedBy.name} on{" "}
-                                    {getDate(item.createdAt)}
-                                  </span>
-                                  <br />
-                                  <a href={`/tasks/${item._id} `}>More...</a>
-                                </Card.Body>
-                              </Card>
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col sm={2}>
-            <Card className="completed">
-              <Card.Body>
-                <Card.Title>
-                  Complete
-                  <span className="task-count-circle">{completedCount}</span>
-                </Card.Title>
-                <Droppable
-                  droppableId="taskCompleted"
-                  width="100%"
-                  height="100%"
-                >
-                  {(provided, snapshot) => (
-                    <div ref={provided.innerRef}>
-                      {task?.taskCompleted.map((item, index) => (
-                        <Draggable
-                          key={item._id}
-                          draggableId={item._id}
-                          index={index + task?.taskInProgress.length}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <Card className="bg-primary mt-3">
-                                <Card.Body>
-                                  <Card.Title>{item.name}</Card.Title>
-                                  <span className="assignInfo">
-                                    Assigned by {item.assignedBy.name} on{" "}
-                                    {getDate(item.createdAt)}
-                                  </span>
-                                  <br />
-                                  <a href={`/tasks/${item._id} `}>More...</a>
-                                </Card.Body>
-                              </Card>
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </DragDropContext>
+      <h3 className="mt-5">Your Tasks</h3>
+      {isLoading ? (
+        <Flex height="70vh" alignItems="center">
+          <Loader />
+        </Flex>
+      ) : (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="row mt-4 "
+          >
+            <motion.div variants={item} className="col-sm-4">
+              <Card className="assigned">
+                <Card.Body style={{ width: "100%", height: "100%" }}>
+                  <Card.Title>
+                    Assigned
+                    <span className="task-count-circle">{assignCount}</span>
+                  </Card.Title>
+                  <Droppable
+                    droppableId="taskAssigned"
+                    style={{ width: "100%", height: "10rem" }}
+                  >
+                    {(provided, snapshot) => (
+                      <div ref={provided.innerRef}>
+                        {task?.taskAssigned.map((item, index) => (
+                          <Draggable
+                            key={item._id}
+                            draggableId={item._id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <Card className="bg-primary mt-3">
+                                  <Card.Body>
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <span className="assignInfo">
+                                      Assigned by {item.assignedBy.name} on{" "}
+                                      {getDate(item.createdAt)}
+                                    </span>
+                                    <br />
+                                    <a href={`/tasks/${item._id} `}>More...</a>
+                                  </Card.Body>
+                                </Card>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </Card.Body>
+              </Card>
+            </motion.div>
+            <motion.div variants={item} className="col-sm-4">
+              <Card className="in-progress">
+                <Card.Body>
+                  <Card.Title>
+                    In Progress
+                    <span className="task-count-circle">{progressCount}</span>
+                  </Card.Title>
+                  <Droppable
+                    droppableId="taskInProgress"
+                    width="100%"
+                    height="100%"
+                  >
+                    {(provided, snapshot) => (
+                      <div ref={provided.innerRef}>
+                        {task?.taskInProgress.map((item, index) => (
+                          <Draggable
+                            key={item._id}
+                            draggableId={item._id}
+                            index={index + task?.taskAssigned.length}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <Card className="bg-primary mt-3">
+                                  <Card.Body>
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <span className="assignInfo">
+                                      Assigned by {item.assignedBy.name} on{" "}
+                                      {getDate(item.createdAt)}
+                                    </span>
+                                    <br />
+                                    <a href={`/tasks/${item._id} `}>More...</a>
+                                  </Card.Body>
+                                </Card>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </Card.Body>
+              </Card>
+            </motion.div>
+            <motion.div variants={item} className="col-sm-4">
+              <Card className="completed">
+                <Card.Body>
+                  <Card.Title>
+                    Complete
+                    <span className="task-count-circle">{completedCount}</span>
+                  </Card.Title>
+                  <Droppable
+                    droppableId="taskCompleted"
+                    width="100%"
+                    height="100%"
+                  >
+                    {(provided, snapshot) => (
+                      <div ref={provided.innerRef}>
+                        {task?.taskCompleted.map((item, index) => (
+                          <Draggable
+                            key={item._id}
+                            draggableId={item._id}
+                            index={index + task?.taskInProgress.length}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <Card className="bg-primary mt-3">
+                                  <Card.Body>
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <span className="assignInfo">
+                                      Assigned by {item.assignedBy.name} on{" "}
+                                      {getDate(item.createdAt)}
+                                    </span>
+                                    <br />
+                                    <a href={`/tasks/${item._id} `}>More...</a>
+                                  </Card.Body>
+                                </Card>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </Card.Body>
+              </Card>
+            </motion.div>
+          </motion.div>
+        </DragDropContext>
+      )}
     </Container>
   );
 };

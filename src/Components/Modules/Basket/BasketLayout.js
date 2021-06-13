@@ -66,7 +66,7 @@ function BucketLayout() {
 
   return (
     <Container mt="4rem">
-      <Text fontSize="heading">Basket</Text>
+      <Text fontSize="heading">Bucket</Text>
       <Text fontSize="text">A place for the team to share files.</Text>
       <Flex
         my="1rem"

@@ -2,17 +2,17 @@
 
 .assigned {
   border-color: #e14d59;
-  width: 18rem;
+  width: 33%rem;
 }
 
 .in-progress {
   border-color: #fdc960;
-  width: 18rem;
+  width: 33%rem;
 }
 
 .completed {
   border-color: #00d998;
-  width: 18rem;
+  width: 33%rem;
 }
 
 .bg-primary {

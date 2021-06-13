@@ -48,7 +48,9 @@ const Profile = () => {
           <>
             <Flex mt="2.3rem" justifyContent="flex-end"></Flex>
             <Flex alignItems="flex-end" justifyContent="space-between">
-              <Avatar username={userData.name} />
+              <Text as="p" fontSize="2rem">
+                Hello {userData.name}
+              </Text>
               <Box>
                 <Button as="a" href="/change-password">
                   Edit Password

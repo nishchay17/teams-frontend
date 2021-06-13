@@ -99,7 +99,7 @@ const App = () => {
                 )}
               </Route>
 
-              <Route path="/basket" exact>
+              <Route path="/bucket" exact>
                 {IsLoggedIn ? <BasketLayout /> : <Redirect to={"/login"} />}
               </Route>
             </Sidebar>
