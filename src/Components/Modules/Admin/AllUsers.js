@@ -97,7 +97,7 @@ const AllUsers = () => {
     console.log(user);
     try {
       const res = await axios.delete(
-        `${process.env.REACT_APP_URL}/user/delete/${user._id}`,
+        `${process.env.REACT_APP_URL}/user/delete/${user.id}`,
         {
           headers: { Authorization: `Bearer ${userDetails.userState.token}` },
         }
@@ -160,9 +160,10 @@ const AllUsers = () => {
           {removeFlag && (
             <ShowModal
               user={user}
-              text={`Are you sure you want to remove ${user}?`}
-              handleChange={deleteUser}
+              text={`Are you sure you want to remove ${user.name}?`}
+              deleteUser={deleteUser}
               hideModal={hideModal}
+              handleChange={deleteUser}
             />
           )}
         </div>

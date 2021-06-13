@@ -32,7 +32,14 @@ const UsersInfo = (props) => {
               </Link>
             </Col>
             <Col md={2}>
-              <Button onClick={() => props.showRemoveUserModal(props.userName)}>
+              <Button
+                onClick={() =>
+                  props.showRemoveUserModal({
+                    id: props.id,
+                    name: props.userName,
+                  })
+                }
+              >
                 Remove User
               </Button>
             </Col>
