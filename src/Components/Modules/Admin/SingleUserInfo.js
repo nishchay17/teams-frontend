@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import moment from "moment";
@@ -8,6 +8,7 @@ import { useUser } from "../../../Provider/UserProvider";
 import Username from "../../library/Username";
 import { Button } from "rebass";
 import ShowModal from "../../library/ShowModal";
+import Container from "../../library/Container";
 
 const SingleUserInfo = () => {
   const [allUsers, setAllUsers] = useState([]);
@@ -118,9 +119,9 @@ const SingleUserInfo = () => {
 
   return (
     <Container>
-      <div className="offset-md-10 mt-3 pr-0 mt-3"></div>
+      <div className=" mt-3 pr-0 mt-3"></div>
       <div style={{ display: "flex" }}>
-        <h3 className="mt-5 offset-md-1" style={{ marginRight: "2rem" }}>
+        <h3 className="mt-5 " style={{ marginRight: "2rem" }}>
           User Information
         </h3>
         {!user.isAdmin && (
@@ -134,7 +135,7 @@ const SingleUserInfo = () => {
         )}
       </div>
 
-      <Row className="offset-md-1 align-items-center user-info">
+      <Row className="mt-2 align-items-center user-info">
         <Col sm={2}>
           <div>Name</div>
           <div>{user.name}</div>
@@ -147,7 +148,7 @@ const SingleUserInfo = () => {
           <div>Employee Id</div>
           <div>{user.employeeId}</div>
         </Col>
-        <Col className="btn">
+        <Col sm={2}>
           <Button
             onClick={showRemoveUserModal}
             style={{ backgroundColor: "#ee5a5a" }}
@@ -157,10 +158,8 @@ const SingleUserInfo = () => {
         </Col>
       </Row>
 
-      <h3 className="mt-5 offset-md-1">
-        <u style={{ textDecorationColor: "#FDC960" }}>Tasks</u>
-      </h3>
-      <Row className="mt-4 offset-md-1">
+      <h3 className="mt-5 ">Tasks</h3>
+      <Row className="mt-4 ">
         <Col sm={4}>
           <Card className="assigned">
             <Card.Body style={{ width: "100%", height: "100%" }}>
@@ -207,7 +206,7 @@ const SingleUserInfo = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col sm={2}>
+        <Col sm={4}>
           <Card className="completed">
             <Card.Body style={{ width: "100%", height: "100%" }}>
               <Card.Title>
