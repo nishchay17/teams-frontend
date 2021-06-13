@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Button } from "rebass";
 import FormInput from "../Form/FormInput";
+import { AiOutlineClose } from "react-icons/ai";
 
 const AddUserModal = (props) => {
   const [show, setShow] = useState(true);
@@ -32,8 +33,11 @@ const AddUserModal = (props) => {
         dialogClassName="modal-style"
         className="modal-text"
       >
-        <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
+        <Modal.Header>
+          <AiOutlineClose
+            style={{ marginLeft: "auto", cursor: "pointer" }}
+            onClick={handleClose}
+          />
         </Modal.Header>
         <Modal.Body>
           {props.text}
@@ -48,7 +52,11 @@ const AddUserModal = (props) => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit(submitHandler)}>
+          <Button
+            variant="primary"
+            onClick={handleSubmit(submitHandler)}
+            style={{ width: "5rem", height: "3rem" }}
+          >
             Add
           </Button>
         </Modal.Footer>

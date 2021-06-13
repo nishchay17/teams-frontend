@@ -104,6 +104,8 @@ const AllUsers = () => {
       );
       const data = res.data.user;
       console.log(data);
+      hideModal();
+      getEmployees();
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +115,9 @@ const AllUsers = () => {
     <Container>
       <Sidebar />
       {isLoading ? (
-        <Loader />
+        <div style={{ height: "35rem" }}>
+          <Loader />
+        </div>
       ) : (
         <div>
           <div className="offset-md-11 pr-0 mt-3"></div>
@@ -161,7 +165,7 @@ const AllUsers = () => {
             <ShowModal
               user={user}
               text={`Are you sure you want to remove ${user.name}?`}
-              deleteUser={deleteUser}
+              resultText={"User removed successfully!"}
               hideModal={hideModal}
               handleChange={deleteUser}
             />
