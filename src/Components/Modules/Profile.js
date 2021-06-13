@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 import axios from "axios";
-
 import Avatar from "../library/Avatar";
 import Container from "../library/Container";
 import { useHistory } from "react-router";
-
 import { useUser } from "../../Provider/UserProvider";
 import Loader from "../library/Loader";
 
@@ -41,7 +39,7 @@ const Profile = () => {
     <Container>
       <Box>
         {isLoading ? (
-          <Flex width="100%" height="85vh">
+          <Flex width="100%" height="25rem">
             <Loader />
           </Flex>
         ) : (

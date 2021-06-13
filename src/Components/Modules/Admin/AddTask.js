@@ -80,7 +80,7 @@ const AddTask = () => {
   const handleDesChange = (e) => {
     console.log(e.target.value);
     setDescription(e.target.value);
-  }
+  };
 
   const submitHandler = async (data) => {
     console.log(data);
@@ -203,52 +203,3 @@ const AddTask = () => {
 };
 
 export default AddTask;
-/**
- * onChange={handleChange}
-                  value={props.transactionTypes.filter(function (option) {
-                    return option.value === transactionType;
-                  })}
-        <Form className="mt-5 offset-md-3">
-
-                  isDisabled={!isNotEmpty(employees)}
-                  <Form.Group>
-                <Form.Label className="addTask">Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter title"
-                  onChange={handleChange}
-                  style={{ width: "20rem", height: "3rem" }}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={5}>
-              <Form.Group>
-                <Form.Label className="addTask">Assigned To</Form.Label>
-                <Select
-                  options={employees}
-                  placeholder={"Select employee"}
-                  onChange={handleChange}
-                  name={"assignedTo"}
-                  isSearchable={true}
-                  isDisabled={isEmpty(employees)}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={5} className="mt-5">
-              <Form.Group>
-                <Form.Label className="addTask">Description</Form.Label>
-                <Form.Control
-                  type="name"
-                  placeholder="Add description"
-                  onChange={handleChange}
-                  style={{ width: "46rem", height: "10rem" }}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Button variant="primary" type="submit" onClick={submitHandler}>
-            Submit
-          </Button>
-        </Form>
-    
- */

@@ -111,7 +111,7 @@ const Tasks = () => {
     <Container>
       <h3 className="mt-5">Your Tasks</h3>
       {isLoading ? (
-        <Flex height="70vh" alignItems="center">
+        <Flex height="35rem" alignItems="center">
           <Loader />
         </Flex>
       ) : (
