@@ -161,7 +161,7 @@ const AllUsers = () => {
             <ShowModal
               user={user}
               text={`Are you sure you want to remove ${user}?`}
-              deleteUser={deleteUser}
+              handleChange={deleteUser}
               hideModal={hideModal}
             />
           )}

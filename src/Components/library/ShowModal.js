@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { Button } from "rebass";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineClose } from "react-icons/ai";
 
 const ShowModal = (props) => {
   const [show, setShow] = useState(true);
@@ -26,8 +27,11 @@ const ShowModal = (props) => {
         dialogClassName="modal-style"
         className="modal-text"
       >
-        <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
+        <Modal.Header>
+          <AiOutlineClose
+            style={{ marginLeft: "auto", cursor: "pointer" }}
+            onClick={handleClose}
+          />
         </Modal.Header>
         <Modal.Body>{props.text}</Modal.Body>
         <Modal.Footer>
