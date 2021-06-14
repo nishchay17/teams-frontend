@@ -19,8 +19,8 @@ function Logo({ noAnimation, ...props }) {
         animate={!noAnimation && { x: 0, opacity: 1 }}
         transition={!noAnimation && { delay: 0.5 }}
       >
-        <Text fontSize="subheading" ml="1rem" mt="0.1rem" color={props.color}>
-          Teams
+        <Text fontSize="subheading" ml="0.5rem" mt="0.1rem" color={props.color}>
+          Team Collab
         </Text>
       </motion.div>
     </Flex>
