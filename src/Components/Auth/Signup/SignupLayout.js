@@ -48,6 +48,7 @@ const SignupLayout = () => {
         ...data,
       });
       setIsLoading(false);
+      console.log(res.data);
       if (res.data.status) {
         userContext.dispatch({
           type: "USER_LOGIN",
