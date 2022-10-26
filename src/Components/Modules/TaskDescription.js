@@ -84,7 +84,7 @@ const TaskDescription = () => {
                   {description.description}
                 </Text>
 
-                {description.fileData && (
+                {description.file && (
                   <Box
                     mt="1.5rem"
                     py="1rem"
@@ -96,20 +96,18 @@ const TaskDescription = () => {
                   >
                     <Text>Attached file</Text>
                     <a
-                      href={`${process.env.REACT_APP_URL}/task/file/${description._id}`}
+                      href={`${description.file}`}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      {description.fileData.contentType.match(
-                        /\/(jpeg|jpg|gif|png)$/
-                      ) ? (
+                      {["jpeg", "jpg", "gif", "png"].includes(description.file.split(".").at(-1)) ? (
                         <Image
                           width="20rem"
                           sx={{
                             cursor: "pointer",
                             borderRadius: "7px",
                           }}
-                          src={`${process.env.REACT_APP_URL}/task/file/${description._id}`}
+                          src={`${description.file}`}
                         />
                       ) : (
                         <Flex
@@ -124,6 +122,7 @@ const TaskDescription = () => {
                           justifyContent="center"
                           alignItems="center"
                         >
+                          {/* {console.log(description.file.split(".").at(-1))} */}
                           No preview
                         </Flex>
                       )}
