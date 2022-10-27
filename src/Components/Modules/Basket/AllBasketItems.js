@@ -10,16 +10,19 @@ function AllBasketItems({ refetch }) {
   const [isLoading, setIsLoading] = useState(false);
   const { userDetails } = useUser();
 
-  useEffect(async () => {
-    setIsLoading(true);
-    const res = await axios.get(`${process.env.REACT_APP_URL}/bucket/get-all`, {
-      headers: {
-        Authorization: `Bearer ${userDetails.userState.token}`,
-      },
-    });
-    console.log(res.data);
-    setAllItems(res.data.bucketItems);
-    setIsLoading(false);
+  useEffect(() => {
+    async function fetch() {
+      setIsLoading(true);
+      const res = await axios.get(`${process.env.REACT_APP_URL}/bucket/get-all`, {
+        headers: {
+          Authorization: `Bearer ${userDetails.userState.token}`,
+        },
+      });
+      console.log(res.data);
+      setAllItems(res.data.bucketItems);
+      setIsLoading(false);
+    }
+    fetch();
   }, [userDetails, refetch]);
 
   return (
@@ -47,12 +50,11 @@ function AllBasketItems({ refetch }) {
                 }}
               >
                 <Box width="100%" height="10rem" sx={{ borderRadius: "9px" }}>
-                  {item.fileData.contentType.match(/\/(jpeg|jpg|gif|png)$/) !==
-                  null ? (
+                  {["jpeg", "jpg", "gif", "png"].includes(item?.file?.split(".")?.at(-1)) ? (
                     <Image
                       width="100%"
                       height="100%"
-                      src={`${process.env.REACT_APP_URL}/bucket/file/${item._id}`}
+                      src={`${item.file}`}
                       sx={{ objectFit: "contain", objectPosition: "left" }}
                     />
                   ) : (
@@ -83,7 +85,7 @@ function AllBasketItems({ refetch }) {
                     fontSize="0.9rem"
                     rel="noopener noreferrer"
                     target="_blank"
-                    href={`${process.env.REACT_APP_URL}/bucket/file/${item._id}`}
+                    href={`${item.file}`}
                   >
                     Download
                   </Button>
